@@ -1,0 +1,23 @@
+.tier-outline-off {
+    outline: 5px solid transparent;
+}
+
+.tier-one-outline {
+    outline: 5px solid #009de6;
+    cursor: pointer;
+}
+
+.tier-two-outline {
+    outline: 5px solid #c8981e;
+    cursor: pointer;
+}
+
+.tier-three-outline {
+    outline: 5px solid #d41118;
+    cursor: pointer;
+}
+
+.tier-four-outline {
+    outline: 5px solid #0dbf40;
+    cursor: pointer;
+}

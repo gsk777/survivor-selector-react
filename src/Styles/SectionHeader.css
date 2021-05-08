@@ -1,0 +1,12 @@
+.section-header {
+    font-family: Survivant;
+    font-size: 1.7rem;
+}
+
+.section-header-bg {
+    background-image: linear-gradient(#e6b800, black);
+}
+
+@media (min-width: 768px) {
+    .section-header {font-size: 2rem}
+}

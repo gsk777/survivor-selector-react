@@ -1,0 +1,30 @@
+.season-logo {
+    border: 5px solid;
+    cursor: pointer;
+}
+
+.winners {
+    z-index: -1;
+    position: absolute;
+    left: 0px;
+    padding-right: 19px;
+    padding-left: 19px;
+    padding-top: 40px;
+    transition: transform .5s;
+}
+
+.season-title {
+    height: 40px;
+}
+
+.season-hovered {
+    opacity: 0;
+}
+
+.logos {
+    transition: opacity .75s;
+}
+
+.flip {
+    transform: rotateY(90deg);
+}
