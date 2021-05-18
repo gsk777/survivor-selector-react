@@ -1,7 +1,3 @@
-.wlseason-hovered {
-    opacity: 1;
-}
-
 .wlseason-number {
     text-shadow: 1px 1px 2px black;
 }
@@ -95,6 +91,10 @@
 
 .checkmark-list {
     font-size: 1.5rem;
+}
+
+.wlseason-hovered {
+    opacity: 1;
 }
 
 @media (min-width: 768px) {
