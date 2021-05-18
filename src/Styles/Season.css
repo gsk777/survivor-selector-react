@@ -1,3 +1,13 @@
+.season-hovered {
+    opacity: 0;
+}
+
+.flip {
+    transform: rotateY(90deg);
+}
+
+/* ----TILED---- */
+
 .season-logo {
     border: 5px solid;
     cursor: pointer;
@@ -11,20 +21,54 @@
     padding-left: 19px;
     padding-top: 40px;
     transition: transform .5s;
+    font-size: .9rem;
 }
 
-.season-title {
+.season-name-div {
     height: 40px;
 }
 
-.season-hovered {
-    opacity: 0;
+.season-name {
+    font-size: .9rem;
 }
 
-.logos {
+.logo-transition {
     transition: opacity .75s;
 }
 
-.flip {
-    transform: rotateY(90deg);
+/* ----LIST---- */
+
+.season-number-list {
+    text-shadow: 1px 1px 2px black;
+    font-size: .8rem;
+}
+
+.season-name-list {
+    z-index: 2;
+    text-shadow: 1px 1px 2px black;
+    font-size: .8rem;
+    transition: opacity .75s;
+    cursor: pointer;
+}
+
+.season-logo-list {
+    height: 40px;
+}
+
+.winners-list {
+    position: absolute;
+    text-shadow: 1px 1px 2px black;
+    transition: transform .5s;
+}
+
+@media (min-width: 576px) {
+    .season-number-list { font-size: .9rem; }
+    .season-name-list { font-size: .9rem; }
+    .season-logo-list { height: 45px; }
+}
+
+@media (min-width: 992px) {
+    .season-number-list { font-size: 1rem; }
+    .season-name-list { font-size: 1rem; }
+    .season-logo-list { height: 50px; }
 }

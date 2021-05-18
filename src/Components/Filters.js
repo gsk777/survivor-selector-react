@@ -75,7 +75,7 @@ const Filters = (props) => {
         <>
             <SectionHeader section={"Filters"} active={props.active} />
             <Container fluid className={props.active ? "filters-active" : ""} >
-                <Container className="pb-4">
+                <Container className="pb-1">
                     <Row noGutters >
                         {filtersList.slice(0, 2).map(f => (
                             <Col xs={6} key={f}>

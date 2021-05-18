@@ -3,9 +3,9 @@
 }
 
 .player-active {
-    background-image: linear-gradient(black 80%, #e6b800);
+    background-image: linear-gradient(black 80%, #404040);
 }
 
 @media (min-width: 768px) {
-    .player-active {background-image: linear-gradient(black 89%, #e6b800)}
+    .player-active {background-image: linear-gradient(black 89%, #404040)}
 }

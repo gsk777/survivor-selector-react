@@ -8,7 +8,7 @@ const FilterBox = (props) => {
             <label className="filter-box">
                 <input
                     type="checkbox"
-                    className="mr-2 filter-box"
+                    className="filter-box mr-2"
                     checked={props.status}
                     onChange={() => props.onFilterClick(props.filterName, props.label, props.status)}
                 />

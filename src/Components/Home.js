@@ -7,6 +7,7 @@ import Tiers from './Tiers';
 import Filters from './Filters';
 import Results from './Results';
 import PlayerSearch from './PlayerSearch';
+import ViewToggle from './ViewToggle';
 
 const Home = () => {
 
@@ -37,6 +38,7 @@ const Home = () => {
         }
     );
     const [selectedPlayer, setSelectedPlayer] = useState('');
+    const [listView, setListView] = useState("tiled");
 
     const resetFilters = () => {
         setFilterStatus(
@@ -97,10 +99,17 @@ const Home = () => {
         }
     }
 
+    const onViewToggle = (view) => {
+        if (view !== listView) {
+            setListView(view);
+        }
+    }
+
     return (
         <div>
+            <br/>
             <Row className="justify-content-center">
-                <Col className="col-lg-10 col-12">
+                <Col lg={10}>
                     <Tiers
                         selected={selectedTier}
                         onTierClick={onTierClick}
@@ -109,14 +118,14 @@ const Home = () => {
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col className="col-lg-6 col-md-7 col-12">
+                <Col md={7} lg={6}>
                     <Filters
                         filter={filterStatus}
                         onFilterClick={onFilterClick}
                         active={(activeSelector === "filters" ? true : false)}
                     />
                 </Col>
-                <Col className="col-lg-4 col-md-5 col-12">
+                <Col md={5} lg={4}>
                     <PlayerSearch
                         player={selectedPlayer}
                         onPlayerSearchClick={onPlayerSearchClick}
@@ -125,13 +134,22 @@ const Home = () => {
                     />
                 </Col>
             </Row>
+            <Row className="justify-content-center pb-2">
+                <Col xs={12} md={12} lg={10}>
+                    <ViewToggle
+                        listView={listView}
+                        onToggle={onViewToggle}
+                    />
+                </Col>
+            </Row>
             <Row className="justify-content-center">
-                <Col className="col-lg-10 col-md-11 col-12">
+                <Col xs={12} md={12} lg={10}>
                     <Results
                         active={activeSelector}
                         selected={selectedTier}
                         filter={filterStatus}
                         player={selectedPlayer}
+                        view={listView}
                     />
                 </Col>
             </Row>

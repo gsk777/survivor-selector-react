@@ -59,7 +59,7 @@ const WatchlistWindow = (props) => {
                     <Col md={6} sm={6}>
                         <Row className="py-sm-2 pt-2">
                             {(seasonsArray.slice(0, (Math.round(seasonsArray.length / 2)))).map(s => (
-                                <Col md={12} sm={12} className="px-2" key={s}>
+                                <Col md={12} sm={12} className="wlseason-list-container px-2" key={s}>
                                     <WLSeasonList
                                         season={s}
                                         seasonStatus={props.userWL[s]}
@@ -73,7 +73,7 @@ const WatchlistWindow = (props) => {
                     <Col md={6} sm={6}>
                         <Row className="py-sm-2 pb-2">
                             {(seasonsArray.slice((Math.round(seasonsArray.length / 2)), seasonsArray.length)).map(s => (
-                                <Col md={12} sm={12} className="px-2" key={s}>
+                                <Col md={12} sm={12} className="wlseason-list-container px-2" key={s}>
                                     <WLSeasonList
                                         season={s}
                                         seasonStatus={props.userWL[s]}

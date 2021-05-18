@@ -30,30 +30,30 @@ const Season = (props) => {
     }
 
     return (
-            <div className="m-1 rounded season-logo" style={{ borderColor: (props.color) }}>
-                <BrowserView>
-                    <h6
-                        className={"winners w-100 text-center text-light" + (flipped ? " flip" : "")}
-                        onTransitionEnd={() => afterFlip()}
-                    >{winnerText}</h6>
-                    <img
-                        className={"logos w-100 mt-1" + (clicked || inHover ? " season-hovered" : "")}
-                        src={props.image}
-                        onClick={() => toggleWinner(props.seasonNum)}
-                        onMouseEnter={() => setHover(true)}
-                        onMouseLeave={() => setHover(false)}
-                    />
-                </BrowserView>
-                <MobileView>
-                    <img
-                        className="w-100 mt-1"
-                        src={props.image}
-                    />
-                </MobileView>
-                <div className="d-flex align-items-center justify-content-center season-title">
-                    <h6 className="text-center text-light text-wrap pt-1 px-1">S{props.seasonNum} - {props.title}</h6>
-                </div>
+        <div className="season-logo m-1 rounded" style={{ borderColor: (props.color) }}>
+            <BrowserView>
+                <h6
+                    className={"winners w-100 text-center text-light" + (flipped ? " flip" : "")}
+                    onTransitionEnd={() => afterFlip()}
+                >{winnerText.toUpperCase()}</h6>
+                <img
+                    className={"logo-transition w-100 mt-1" + (clicked || inHover ? " season-hovered" : "")}
+                    src={props.image}
+                    onClick={() => toggleWinner(props.seasonNum)}
+                    onMouseEnter={() => setHover(true)}
+                    onMouseLeave={() => setHover(false)}
+                />
+            </BrowserView>
+            <MobileView>
+                <img
+                    className="w-100 mt-1"
+                    src={props.image}
+                />
+            </MobileView>
+            <div className="season-name-div d-flex align-items-center justify-content-center">
+                <h6 className="season-name text-center text-light text-wrap pt-1 px-1">S{props.seasonNum} - {props.title}</h6>
             </div>
+        </div>
     );
 }
 

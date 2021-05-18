@@ -1,28 +1,51 @@
-.season-number {
+.wlseason-hovered {
+    opacity: 1;
+}
+
+.wlseason-number {
     text-shadow: 1px 1px 2px black;
 }
 
-.season-name {
-    font-size: .75vw;
-    font-weight: 550;
-    line-height: .8rem;
+.wlseason-inactive {
+    opacity: .35;
+}
+
+.edit-season-modal {
+    border: none !important;
+}
+
+.edit-season-title {
+    text-shadow: 1px 1px 2px black;
+}
+
+.edit-season-body {
     height: 40px;
-    text-shadow: 1px 1px 2px black;
 }
 
-.season-container {
+/* ----TILED---- */
+
+.wlseason-container {
     border: 5px solid;
     cursor: pointer;
 }
 
-.textbox {
+.edit-wlseason {
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    width: calc(100% - 8px);
+    height: calc(100% - 16px);
+    z-index: 3;
+    opacity: 0;
+    font-size: .85rem;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px black;
+}
+
+.wlseason-text {
     margin: 3px;
     padding-left: 3px !important;
     padding-right: 3px !important;
-}
-
-.inactive {
-    opacity: .35;
 }
 
 .watched {
@@ -38,83 +61,60 @@
     left: 0px;
 }
 
-.edit-season {
-    position: absolute;
-    left: 4px;
-    top: 8px;
-    width: calc(100% - 8px);
-    height: calc(100% - 16px);
-    z-index: 3;
-    opacity: 0;
-    font-size: .85rem;
-    font-weight: 500;
+.checkmark {
+    font-size: 2.5vw;
+}
+
+.wlseason-name {
+    font-size: .75vw;
+    font-weight: 550;
+    line-height: .8rem;
+    height: 40px;
     text-shadow: 1px 1px 2px black;
 }
 
-.edit-list-season {
+/* ----LIST---- */
+
+.edit-wlseason-list {
     position: absolute;
-    top: 0px;
+    top: 2px;
     left: 22.5%;
     z-index: 3;
     opacity: 0;
     width: 55%;
-    height: 100%;
+    height: calc(100% - 4px);
     font-size: .85rem;
     border: 3px solid white;
 }
 
-.edit-season-modal {
-    border: none !important;
-}
-
-.edit-season-title {
+.wlseason-name-list {
+    font-size: .85rem;
+    font-weight: 550;
     text-shadow: 1px 1px 2px black;
-}
-
-.edit-season-body {
-    height: 40px;
-}
-
-.hovered {
-    opacity: 1;
-}
-
-.edit-checkbox, .season-list-container {
-    cursor: pointer;
-}
-
-.checkmark {
-    font-size: 2.5vw;
 }
 
 .checkmark-list {
     font-size: 1.5rem;
 }
 
-.season-name-list {
-    font-size: .85rem;
-    font-weight: 550;
-    text-shadow: 1px 1px 2px black;
-}
-
 @media (min-width: 768px) {
-    .season-name-list {font-size: .9rem;}
+    .wlseason-name-list {font-size: .9rem;}
 }
 
 @media (min-width: 992px) {
-    .season-name {font-size: 1vw;}
-    .edit-season {font-size: 1.1vw;}
+    .wlseason-name {font-size: 1vw;}
+    .edit-wlseason {font-size: 1.1vw;}
     .checkmark {font-size: 3.5vw;}
 }
 
 @media (min-width: 1200px) {
-    .season-name {font-size: .75vw;}
-    .edit-season {font-size: .9vw;}
+    .wlseason-name {font-size: .75vw;}
+    .edit-wlseason {font-size: .9vw;}
     .checkmark {font-size: 2.5vw;}
 }
 
 @media (min-width: 1600px) {
-    .season-name {font-size: .75rem}
-    .edit-season {font-size: .90rem}
+    .wlseason-name {font-size: .75rem}
+    .edit-wlseason {font-size: .90rem}
     .checkmark {font-size: 2.2vw}
 }

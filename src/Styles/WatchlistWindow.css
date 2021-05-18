@@ -7,6 +7,11 @@
     display: none;
 }
 
+.wlseason-list-container {
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
 @media (min-width: 992px) {
     .tiled { display: block }
     .list { display: none }

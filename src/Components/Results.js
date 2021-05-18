@@ -3,9 +3,12 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import Season from '../Components/Season';
+
+import Season from './Season';
+import SeasonList from './SeasonList';
 
 import seasonData, { numSeasons } from '../season-data';
+
 
 function activeFilterList(status) {
     const activeFilters = []
@@ -88,27 +91,70 @@ const Results = (props) => {
     }
 
     return (
-        <Container fluid >
-            <br/>
-            <Row noGutters className="justify-content-center" xs={2} sm={3} md={4} lg={5} xl={6}>
-                {seasonList.map(season => (
-                    <Col key={season}>
-                        <Season
-                            key={season.toString()}
-                            seasonNum={season}
-                            image={seasonData.get(season).seasonLogo}
-                            title={seasonData.get(season).seasonName}
-                            winner={seasonData.get(season).seasonWinner}
-                            color={seasonData.get(season).seasonColor}
-                            showWinner={seasonData.get(season).showWinner}
-                            onClick={toggleShowWinner}
-                        />
+        <>
+            <Container fluid className={(props.view === "tiled") ? "" : "d-none"}>
+                <Row noGutters className="justify-content-center" xs={2} sm={3} md={4} lg={5} xl={6}>
+                    {seasonList.map(season => (
+                        <Col key={season}>
+                            <Season
+                                key={season.toString()}
+                                seasonNum={season}
+                                image={seasonData.get(season).seasonLogo}
+                                title={seasonData.get(season).seasonName}
+                                winner={seasonData.get(season).seasonWinner}
+                                color={seasonData.get(season).seasonColor}
+                                showWinner={seasonData.get(season).showWinner}
+                                onClick={toggleShowWinner}
+                            />
+                        </Col>
+                    ))}
+                </Row>
+                <br/>
+                <br/>
+            </Container>
+            <Container fluid className={(props.view === "list") ? "" : "d-none"}>
+                <Row>
+                    <Col md={6} className="px-2 pl-md-2 pr-md-1 px-lg-2">
+                        <Row>
+                            {(seasonList.slice(0, (Math.round(seasonList.length / 2)))).map(season => (
+                                <Col xs={12} key={season} className="pb-1">
+                                    <SeasonList
+                                        key={season.toString()}
+                                        seasonNum={season}
+                                        image={seasonData.get(season).seasonLogo}
+                                        title={seasonData.get(season).seasonName}
+                                        winner={seasonData.get(season).seasonWinner}
+                                        color={seasonData.get(season).seasonColor}
+                                        showWinner={seasonData.get(season).showWinner}
+                                        onClick={toggleShowWinner}
+                                    />
+                                </Col>
+                            ))}
+                        </Row>
                     </Col>
-                ))}
-            </Row>
-            <br/>
-            <br/>
-        </Container>
+                    <Col md={6} className="px-2 pl-md-1 pr-md-2 px-lg-2">
+                        <Row>
+                            {(seasonList.slice((Math.round(seasonList.length / 2)), seasonList.length)).map(season => (
+                                <Col xs={12} key={season} className="pb-1">
+                                    <SeasonList
+                                        key={season.toString()}
+                                        seasonNum={season}
+                                        image={seasonData.get(season).seasonLogo}
+                                        title={seasonData.get(season).seasonName}
+                                        winner={seasonData.get(season).seasonWinner}
+                                        color={seasonData.get(season).seasonColor}
+                                        showWinner={seasonData.get(season).showWinner}
+                                        onClick={toggleShowWinner}
+                                    />
+                                </Col>
+                            ))}
+                        </Row>
+                    </Col>
+                </Row>
+                <br/>
+                <br/>
+            </Container>
+        </>
     );
 }
 

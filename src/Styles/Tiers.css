@@ -1,7 +1,7 @@
 .tiers-active {
-    background-image: linear-gradient(black 88%, #e6b800);
+    background-image: linear-gradient(black 88%, #404040);
 }
 
 @media (min-width: 768px) {
-    .tiers-active {background-image: linear-gradient(black 82%, #e6b800)}
+    .tiers-active {background-image: linear-gradient(black 82%, #404040)}
 }

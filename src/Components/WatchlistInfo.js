@@ -2,8 +2,6 @@ import React from 'react';
 import { IconContext } from 'react-icons';
 import { TiInfo } from 'react-icons/ti';
 
-import '../Styles/WatchlistInfo.css';
-
 const listInfo = {
     "All 40": "All 40 seasons of Survivor. Get comfy.",
     "Keep the Scraps": "Almost everything. The bottom of the barrel not included.",

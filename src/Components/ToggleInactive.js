@@ -2,8 +2,6 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
-import '../Styles/ToggleInactive.css';
-
 const ToggleInactive = (props) => {
     return (
         <Container fluid>

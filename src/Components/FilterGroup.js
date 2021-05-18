@@ -15,7 +15,7 @@ const FilterGroup = (props) => {
 
     return (
         <div className="col-12 py-2 text-light text-center">
-            <h5>{props.filterName}</h5>
+            <h5 className="filter-title">{props.filterName}</h5>
             {numOptions.map((option) => (
                 <Row key={option} className="filter-box-row text-start">
                     <FilterBox

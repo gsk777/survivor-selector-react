@@ -111,13 +111,14 @@ const MyWatchlist = () => {
 
     return (
         <>
+        <br/>
             <Row className="justify-content-center">
-                <Col className="col-lg-10 col-12">
+                <Col lg={10}>
                     <SectionHeader section={"My Watchlist"} active={true} />
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col className="col-lg-6 col-md-8 col-sm-10 col-11 pt-3">
+                <Col xs={11} sm={10} md={8} lg={6} className="pt-3">
                     <SelectWatchlist
                         onListSelect={onListSelect}
                         onListSubmit={onListSubmit}
@@ -126,12 +127,12 @@ const MyWatchlist = () => {
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col className="col-lg-6 col-8 pt-3">
+                <Col xs={8} lg={6} className="pt-3">
                     <WatchlistInfo watchlist={selectedList}/>
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col className="col-xl-11 col-lg-8 col-md-10 col-12">
+                <Col md={10} lg={8} xl={11}>
                     <ToggleInactive
                         checked={hideInactive}
                         toggleHideInactive={onInactiveToggle}
@@ -139,7 +140,7 @@ const MyWatchlist = () => {
                 </Col>
             </Row>
             <Row className="justify-content-center pt-1">
-                <Col className="col-xl-11 col-lg-8 col-md-10 col-12">
+                <Col md={10} lg={8} xl={11}>
                     <WatchlistWindow
                         userWL={userWL}
                         hideInactive={hideInactive}

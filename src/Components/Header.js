@@ -8,7 +8,7 @@ const Header = () => {
     return (
             <Navbar expand="sm" variant="dark">
                 <Navbar.Brand>
-                    <h1 className="font-weight-bold text-light text-wrap title">SURVIVOR SELECTOR</h1>
+                    <h1 className="title font-weight-bold text-light text-wrap">SURVIVOR SELECTOR</h1>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbar-menu"/>
                 <Navbar.Collapse id="navbar-menu">

@@ -4,7 +4,7 @@
 }
 
 .section-header-bg {
-    background-image: linear-gradient(#e6b800, black);
+    background-image: linear-gradient(#404040, black);
 }
 
 @media (min-width: 768px) {

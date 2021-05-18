@@ -25,30 +25,33 @@ const WLSeasonList = (props) => {
     return (
         <>
         <Container
-            className={"season-list-container" + ((props.seasonStatus === "inactive") ? " inactive" : "")}
+            className={"cursor" + ((props.seasonStatus === "inactive") ? " wlseason-inactive" : "")}
             onClick={isMobile ? handleShow : () => (false)}
         >
             <BrowserView>
                 <div
-                    className={"edit-list-season text-light d-flex align-items-center justify-content-center" + (inHover ? " hovered" : "")}
+                    className={
+                        "edit-wlseason-list text-light d-flex align-items-center justify-content-center" +
+                        (inHover ? " wlseason-hovered" : "")
+                    }
                     style={{backgroundColor: seasonColor}}
                     onMouseEnter={() => setHover(true)}
                     onMouseLeave={() => setHover(false)}
                 >
                     <div>
-                        <label className="pr-2 pt-2 edit-checkbox">
+                        <label className="cursor pr-2 pt-2">
                             <input
                                 type="checkbox"
-                                className="mr-1 edit-checkbox"
+                                className="cursor mr-1"
                                 checked={(props.seasonStatus === "watched") ? true : false}
                                 onChange={() => props.onSeasonWatchedToggle(props.season)}
                             />
                             Watched
                         </label>
-                        <label className="pl-2 pt-1 edit-checkbox">
+                        <label className="cursor pl-2 pt-1">
                             <input
                                 type="checkbox"
-                                className="mr-1 edit-checkbox"
+                                className="cursor mr-1"
                                 checked={(props.seasonStatus === "active" || props.seasonStatus === "watched") ? true : false}
                                 onChange={() => props.onSeasonActiveToggle(props.season)}
                             />
@@ -57,16 +60,16 @@ const WLSeasonList = (props) => {
                     </div>
                 </div>
             </BrowserView>
-            <Row>
-                <Col className="text-light col-2" style={{backgroundColor: seasonColor}}>
-                    <p className="my-1 font-weight-bold season-number">S{props.season}</p>
+            <Row className="rounded" style={{ backgroundColor: seasonColor }}>
+                <Col xs={2} className="text-light">
+                    <p className="wlseason-number my-1 font-weight-bold">S{props.season}</p>
                 </Col>
-                <Col className="text-light col-8 px-2" style={{backgroundColor: seasonColor}}>
-                    <div className="d-flex align-items-center justify-content-center season-name-list">
+                <Col xs={8} className="text-light px-2">
+                    <div className="wlseason-name-list d-flex align-items-center justify-content-center">
                         <p className="my-1">{seasonData.get(props.season).seasonName}</p>
                     </div>
                 </Col>
-                <Col className="col-2 text-center" style={{backgroundColor: seasonColor}}>
+                <Col xs={2} className="text-center">
                     <div className={((props.seasonStatus !== "watched") ? "d-none" : "")}>
                         <IconContext.Provider value={{ color: "#ffffff" }}>
                             <IoCheckmarkCircleSharp className="checkmark-list my-1"/>
@@ -78,23 +81,25 @@ const WLSeasonList = (props) => {
         <MobileView>
             <Modal show={show} onHide={handleClose} size="sm" contentClassName="edit-season-modal">
                 <Modal.Header closeButton style={{backgroundColor: seasonColor}}>
-                    <Modal.Title className="text-light edit-season-title">S{props.season} - {seasonData.get(props.season).seasonName}</Modal.Title>
+                    <Modal.Title className="edit-season-title text-light">
+                        S{props.season} - {seasonData.get(props.season).seasonName}
+                    </Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="d-flex align-items-center justify-content-center edit-season-body">
+                <Modal.Body className="edit-season-body d-flex align-items-center justify-content-center">
                     <div>
-                        <label className="mt-2 edit-checkbox">
+                        <label className="cursor mt-2">
                             <input
                                 type="checkbox"
-                                className="mr-1 edit-checkbox"
+                                className="cursor mr-1"
                                 checked={(props.seasonStatus === "watched") ? true : false}
                                 onChange={() => props.onSeasonWatchedToggle(props.season)}
                             />
                             Watched
                         </label>
-                        <label className="pl-2 edit-checkbox">
+                        <label className="cursor pl-2">
                             <input
                                 type="checkbox"
-                                className="mr-1 edit-checkbox"
+                                className="cursor mr-1"
                                 checked={(props.seasonStatus === "active" || props.seasonStatus === "watched") ? true : false}
                                 onChange={() => props.onSeasonActiveToggle(props.season)}
                             />
