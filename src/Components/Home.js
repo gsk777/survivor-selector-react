@@ -108,7 +108,7 @@ const Home = () => {
     return (
         <div>
             <br/>
-            <Row className="justify-content-center">
+            <Row className="justify-content-center mx-0">
                 <Col lg={10}>
                     <Tiers
                         selected={selectedTier}
@@ -117,7 +117,7 @@ const Home = () => {
                     />
                 </Col>
             </Row>
-            <Row className="justify-content-center">
+            <Row className="justify-content-center mx-0">
                 <Col md={7} lg={6}>
                     <Filters
                         filter={filterStatus}
@@ -134,7 +134,7 @@ const Home = () => {
                     />
                 </Col>
             </Row>
-            <Row className="justify-content-center pb-2">
+            <Row className="justify-content-center pb-2 mx-0">
                 <Col xs={12} md={12} lg={10}>
                     <ViewToggle
                         listView={listView}
@@ -142,7 +142,7 @@ const Home = () => {
                     />
                 </Col>
             </Row>
-            <Row className="justify-content-center">
+            <Row className="justify-content-center mx-0">
                 <Col xs={12} md={12} lg={10}>
                     <Results
                         active={activeSelector}
