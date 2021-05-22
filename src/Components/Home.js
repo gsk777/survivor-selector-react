@@ -69,7 +69,9 @@ const Home = () => {
     
     const onTierClick = (tier) => {
         setSelectedTier(tier);
-        resetFilters();
+        if (activeSelector === "filters") {
+            resetFilters();
+        };
         setActiveSelector("tiers");
     }
 

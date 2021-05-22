@@ -7,14 +7,15 @@ import Button from 'react-bootstrap/Button';
 
 import '../Styles/SelectWatchlist.css';
 
-const watchlists = [
-    {value: "All 40", label: "All 40"},
-    {value: "Keep the Scraps", label: "Keep the Scraps"},
-    {value: "History of Survivor", label: "History of Survivor"},
-    {value: "Only the Best", label: "Only the Best"}
-];
-
 const SelectWatchlist = (props) => {
+
+    const watchlists = [
+        {value: "All 40", label: "All 40"},
+        {value: "Keep the Scraps", label: "Keep the Scraps"},
+        {value: "History of Survivor", label: "History of Survivor"},
+        {value: "Only the Best", label: "Only the Best"}
+    ];
+
     return (
         <Form>
             <Row>

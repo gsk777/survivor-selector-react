@@ -9,51 +9,49 @@ import SeasonList from './SeasonList';
 
 import seasonData, { numSeasons } from '../season-data';
 
-
-function activeFilterList(status) {
-    const activeFilters = []
-    if (status['Cast Type']['All Newbie']) {
-        activeFilters.push('newbie');
-    }
-    if (status['Cast Type']['All Returnee']) {
-        activeFilters.push('returnee');
-    }
-    if (status['Cast Type']['Mixed']) {
-        activeFilters.push('mixed');
-    }
-    if (status['Final Tribal']['Final 2']) {
-        activeFilters.push(2);
-    }
-    if (status['Final Tribal']['Final 3']) {
-        activeFilters.push(3);
-    }
-    if (status['Starting Tribes']['2']) {
-        activeFilters.push('two');
-    }
-    if (status['Starting Tribes']['3']) {
-        activeFilters.push('three');
-    }
-    if (status['Starting Tribes']['4']) {
-        activeFilters.push('four');
-    }
-    if (status['Second Chance']['None']) {
-        activeFilters.push('none');
-    }
-    if (status['Second Chance']['Redemption Island']) {
-        activeFilters.push('redemption');
-    }
-    if (status['Second Chance']['Edge of Extinction']) {
-        activeFilters.push('edge');
-    }
-    if (status['Second Chance']['Outcasts']) {
-        activeFilters.push('outcast');
-    }
-    return (activeFilters);
-}
-
-
 const Results = (props) => {
 
+    function activeFilterList(status) {
+        const activeFilters = []
+        if (status['Cast Type']['All Newbie']) {
+            activeFilters.push('newbie');
+        }
+        if (status['Cast Type']['All Returnee']) {
+            activeFilters.push('returnee');
+        }
+        if (status['Cast Type']['Mixed']) {
+            activeFilters.push('mixed');
+        }
+        if (status['Final Tribal']['Final 2']) {
+            activeFilters.push(2);
+        }
+        if (status['Final Tribal']['Final 3']) {
+            activeFilters.push(3);
+        }
+        if (status['Starting Tribes']['2']) {
+            activeFilters.push('two');
+        }
+        if (status['Starting Tribes']['3']) {
+            activeFilters.push('three');
+        }
+        if (status['Starting Tribes']['4']) {
+            activeFilters.push('four');
+        }
+        if (status['Second Chance']['None']) {
+            activeFilters.push('none');
+        }
+        if (status['Second Chance']['Redemption Island']) {
+            activeFilters.push('redemption');
+        }
+        if (status['Second Chance']['Edge of Extinction']) {
+            activeFilters.push('edge');
+        }
+        if (status['Second Chance']['Outcasts']) {
+            activeFilters.push('outcast');
+        }
+        return (activeFilters);
+    }
+    
     const seasonList = [];
     switch (props.active) {
         case "tiers":

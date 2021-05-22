@@ -39,27 +39,27 @@ tiersData.set(4, {
     imageOff: tier_four_fade
 });
 
-const buildTierImages = (tier) => {
-    const imageList = []
-    for (var i = 1; i <= tiersData.size; i++) {
-        if (i === tier) {
-            imageList.push(tiersData.get(i).imageOn);
-            tiersData.set(i, {
-                ...tiersData.get(i),
-                selected: true
-            });
-        } else {
-            imageList.push(tiersData.get(i).imageOff);
-            tiersData.set(i, {
-                ...tiersData.get(i),
-                selected: false
-            });
-        }
-    }
-    return imageList;
-}
-
 const Tiers = (props) => {
+
+    const buildTierImages = (tier) => {
+        const imageList = []
+        for (var i = 1; i <= tiersData.size; i++) {
+            if (i === tier) {
+                imageList.push(tiersData.get(i).imageOn);
+                tiersData.set(i, {
+                    ...tiersData.get(i),
+                    selected: true
+                });
+            } else {
+                imageList.push(tiersData.get(i).imageOff);
+                tiersData.set(i, {
+                    ...tiersData.get(i),
+                    selected: false
+                });
+            }
+        }
+        return imageList;
+    }
 
     const tierImages = buildTierImages(props.selected);
     const tiersList = []

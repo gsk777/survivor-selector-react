@@ -44,27 +44,27 @@ filtersData.set(4, {
     }
 });
 
-const updateStatus = (status) => {
-    filtersData.set(1, {
-        ...filtersData.get(1),
-        filterOptions: status['Cast Type']
-    });
-    filtersData.set(2, {
-        ...filtersData.get(2),
-        filterOptions: status['Final Tribal']
-    });
-    filtersData.set(3, {
-        ...filtersData.get(3),
-        filterOptions: status['Starting Tribes']
-    });
-    filtersData.set(4, {
-        ...filtersData.get(4),
-        filterOptions: status['Second Chance']
-    });
-}
-
 const Filters = (props) => {
 
+    const updateStatus = (status) => {
+        filtersData.set(1, {
+            ...filtersData.get(1),
+            filterOptions: status['Cast Type']
+        });
+        filtersData.set(2, {
+            ...filtersData.get(2),
+            filterOptions: status['Final Tribal']
+        });
+        filtersData.set(3, {
+            ...filtersData.get(3),
+            filterOptions: status['Starting Tribes']
+        });
+        filtersData.set(4, {
+            ...filtersData.get(4),
+            filterOptions: status['Second Chance']
+        });
+    }
+    
     updateStatus(props.filter);
     const filtersList = []
     for (var i = 1; i <= filtersData.size; i++) {

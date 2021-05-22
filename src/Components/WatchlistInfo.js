@@ -2,14 +2,15 @@ import React from 'react';
 import { IconContext } from 'react-icons';
 import { TiInfo } from 'react-icons/ti';
 
-const listInfo = {
-    "All 40": "All 40 seasons of Survivor. Get comfy.",
-    "Keep the Scraps": "Almost everything. The bottom of the barrel not included.",
-    "History of Survivor": "Great seasons + series defining strategy/players.",
-    "Only the Best": "Greatest Hits - Only the best!"
-}
-
 const WatchlistInfo = (props) => {
+
+    const listInfo = {
+        "All 40": "All 40 seasons of Survivor. Get comfy.",
+        "Keep the Scraps": "Almost everything. The bottom of the barrel not included.",
+        "History of Survivor": "Great seasons + series defining strategy/players.",
+        "Only the Best": "Greatest Hits - Only the best!"
+    }
+
     return (
         <>
             <IconContext.Provider value={{ size: "2em", color: "#0099ff" }}>
