@@ -9,6 +9,8 @@ import Results from './Results';
 import PlayerSearch from './PlayerSearch';
 import ViewToggle from './ViewToggle';
 
+export const HomeContext = React.createContext();
+
 const Home = () => {
 
     const [activeSelector, setActiveSelector] = useState("tiers");
@@ -108,54 +110,48 @@ const Home = () => {
     }
 
     return (
-        <div>
-            <br/>
-            <Row className="justify-content-center mx-0">
-                <Col lg={10}>
-                    <Tiers
-                        selected={selectedTier}
-                        onTierClick={onTierClick}
-                        active={(activeSelector === "tiers" ? true : false)}
-                    />
-                </Col>
-            </Row>
-            <Row className="justify-content-center mx-0">
-                <Col md={7} lg={6}>
-                    <Filters
-                        filter={filterStatus}
-                        onFilterClick={onFilterClick}
-                        active={(activeSelector === "filters" ? true : false)}
-                    />
-                </Col>
-                <Col md={5} lg={4}>
-                    <PlayerSearch
-                        player={selectedPlayer}
-                        onPlayerSearchClick={onPlayerSearchClick}
-                        onPlayerSelect={onPlayerSelect}
-                        active={(activeSelector === "player" ? true : false)}
-                    />
-                </Col>
-            </Row>
-            <Row className="justify-content-center pb-2 mx-0">
-                <Col xs={12} md={12} lg={10}>
-                    <ViewToggle
-                        listView={listView}
-                        onToggle={onViewToggle}
-                    />
-                </Col>
-            </Row>
-            <Row className="justify-content-center mx-0">
-                <Col xs={12} md={12} lg={10}>
-                    <Results
-                        active={activeSelector}
-                        selected={selectedTier}
-                        filter={filterStatus}
-                        player={selectedPlayer}
-                        view={listView}
-                    />
-                </Col>
-            </Row>
-        </div>
+        <HomeContext.Provider value={{ selectedTier, filterStatus, selectedPlayer, listView }}>
+            <div>
+                <br/>
+                <Row className="justify-content-center mx-0">
+                    <Col lg={10}>
+                        <Tiers
+                            onTierClick={onTierClick}
+                            active={(activeSelector === "tiers" ? true : false)}
+                        />
+                    </Col>
+                </Row>
+                <Row className="justify-content-center mx-0">
+                    <Col md={7} lg={6}>
+                        <Filters
+                            onFilterClick={onFilterClick}
+                            active={(activeSelector === "filters" ? true : false)}
+                        />
+                    </Col>
+                    <Col md={5} lg={4}>
+                        <PlayerSearch
+                            onPlayerSearchClick={onPlayerSearchClick}
+                            onPlayerSelect={onPlayerSelect}
+                            active={(activeSelector === "player" ? true : false)}
+                        />
+                    </Col>
+                </Row>
+                <Row className="justify-content-center pt-1 pb-2 mx-0">
+                    <Col xs={12} md={12} lg={10}>
+                        <ViewToggle
+                            onToggle={onViewToggle}
+                        />
+                    </Col>
+                </Row>
+                <Row className="justify-content-center mx-0">
+                    <Col xs={12} md={12} lg={10}>
+                        <Results
+                            active={activeSelector}
+                        />
+                    </Col>
+                </Row>
+            </div>
+        </HomeContext.Provider>
     );
 }
 

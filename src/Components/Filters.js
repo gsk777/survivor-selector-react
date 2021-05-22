@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { HomeContext } from './Home';
 import FilterGroup from './FilterGroup';
 import SectionHeader from './SectionHeader';
 import Row from 'react-bootstrap/Row';
@@ -46,6 +47,8 @@ filtersData.set(4, {
 
 const Filters = (props) => {
 
+    const context = useContext(HomeContext);
+
     const updateStatus = (status) => {
         filtersData.set(1, {
             ...filtersData.get(1),
@@ -65,7 +68,7 @@ const Filters = (props) => {
         });
     }
     
-    updateStatus(props.filter);
+    updateStatus(context.filterStatus);
     const filtersList = []
     for (var i = 1; i <= filtersData.size; i++) {
         filtersList.push(i);

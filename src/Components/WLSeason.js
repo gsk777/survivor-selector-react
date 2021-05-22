@@ -81,6 +81,7 @@ const WLSeason = (props) => {
                     <img
                         className="w-100"
                         src={seasonData.get(props.season).seasonLogo}
+                        alt=""
                     />
                 </Col>
             </Row>

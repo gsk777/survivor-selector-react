@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { HomeContext } from './Home';
 
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
@@ -41,6 +42,8 @@ tiersData.set(4, {
 
 const Tiers = (props) => {
 
+    const context = useContext(HomeContext);
+
     const buildTierImages = (tier) => {
         const imageList = []
         for (var i = 1; i <= tiersData.size; i++) {
@@ -61,7 +64,7 @@ const Tiers = (props) => {
         return imageList;
     }
 
-    const tierImages = buildTierImages(props.selected);
+    const tierImages = buildTierImages(context.selectedTier);
     const tiersList = []
     for (var i = tiersData.size; i > 0; i--) {
         tiersList.push(i);

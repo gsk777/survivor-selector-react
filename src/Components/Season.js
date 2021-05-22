@@ -39,6 +39,7 @@ const Season = (props) => {
                 <img
                     className={"logo-transition w-100 mt-1" + (clicked || inHover ? " season-hovered" : "")}
                     src={props.image}
+                    alt=""
                     onClick={() => toggleWinner(props.seasonNum)}
                     onMouseEnter={() => setHover(true)}
                     onMouseLeave={() => setHover(false)}
@@ -48,6 +49,7 @@ const Season = (props) => {
                 <img
                     className="w-100 mt-1"
                     src={props.image}
+                    alt=""
                 />
             </MobileView>
             <div className="season-name-div d-flex align-items-center justify-content-center">

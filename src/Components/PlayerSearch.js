@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { HomeContext } from './Home';
 import { Container } from 'react-bootstrap';
 import Select from 'react-select';
 
@@ -7,6 +8,8 @@ import '../Styles/PlayerSearch.css';
 import playerList from '../player-data';
 
 const PlayerSearch = (props) => {
+
+    const context = useContext(HomeContext);
 
     const customStyles = {
         valueContainer: (styles) => ({
@@ -30,7 +33,7 @@ const PlayerSearch = (props) => {
                 <Select
                     className="search-box pt-3 pb-4"
                     styles={customStyles}
-                    defaultValue={props.player}
+                    defaultValue={context.selectedPlayer}
                     isSearchable={true}
                     isClearable={true}
                     maxMenuHeight={150}

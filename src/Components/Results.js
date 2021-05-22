@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { HomeContext } from './Home';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,6 +11,8 @@ import SeasonList from './SeasonList';
 import seasonData, { numSeasons } from '../season-data';
 
 const Results = (props) => {
+
+    const context = useContext(HomeContext);
 
     function activeFilterList(status) {
         const activeFilters = []
@@ -55,30 +58,32 @@ const Results = (props) => {
     const seasonList = [];
     switch (props.active) {
         case "tiers":
-            for (var i = 1; i <= numSeasons; i++) {
-                if (seasonData.get(i).tier <= props.selected) {
-                    seasonList.push(i);
+            for (var t = 1; t <= numSeasons; t++) {
+                if (seasonData.get(t).tier <= context.selectedTier) {
+                    seasonList.push(t);
                 }
             };
             break;
         case "filters":
-            const activeFilters = activeFilterList(props.filter);
-            for (var i = 1; i <= numSeasons; i++) {
-                if ((activeFilters.includes(seasonData.get(i).castType)) &&
-                    (activeFilters.includes(seasonData.get(i).finalTribal)) &&
-                    (activeFilters.includes(seasonData.get(i).numTribes)) &&
-                    (activeFilters.includes(seasonData.get(i).secondChance))) {
-                    seasonList.push(i);
+            const activeFilters = activeFilterList(context.filterStatus);
+            for (var f = 1; f <= numSeasons; f++) {
+                if ((activeFilters.includes(seasonData.get(f).castType)) &&
+                    (activeFilters.includes(seasonData.get(f).finalTribal)) &&
+                    (activeFilters.includes(seasonData.get(f).numTribes)) &&
+                    (activeFilters.includes(seasonData.get(f).secondChance))) {
+                    seasonList.push(f);
                 }
             };
             break;
         case "player":
-            for (var i = 1; i <= numSeasons; i++) {
-                if (seasonData.get(i).seasonCast.includes(props.player)) {
-                    seasonList.push(i);
+            for (var p = 1; p <= numSeasons; p++) {
+                if (seasonData.get(p).seasonCast.includes(context.selectedPlayer)) {
+                    seasonList.push(p);
                 }
             };
             break;
+        default:
+            throw new Error('Unexpected value for active selector');
     }
 
     const toggleShowWinner = (season) => {
@@ -90,7 +95,7 @@ const Results = (props) => {
 
     return (
         <>
-            <Container fluid className={(props.view === "tiled") ? "" : "d-none"}>
+            <Container fluid className={(context.listView === "tiled") ? "" : "d-none"}>
                 <Row noGutters className="justify-content-center" xs={2} sm={3} md={4} lg={5} xl={6}>
                     {seasonList.map(season => (
                         <Col key={season}>
@@ -110,7 +115,7 @@ const Results = (props) => {
                 <br/>
                 <br/>
             </Container>
-            <Container fluid className={(props.view === "list") ? "" : "d-none"}>
+            <Container fluid className={(context.listView === "list") ? "" : "d-none"}>
                 <Row>
                     <Col md={6} className="px-2 pl-md-2 pr-md-1 px-lg-2">
                         <Row>

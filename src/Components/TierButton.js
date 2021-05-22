@@ -19,6 +19,7 @@ const TierButton = (props) => {
             <img
                 className={ "w-100 " + (props.selected || inHover ? tierOutlines[props.tier] : "tier-outline-off") }
                 src={props.image}
+                alt=""
                 onClick={() => props.onClick(props.tier)}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
