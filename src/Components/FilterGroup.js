@@ -23,7 +23,6 @@ const FilterGroup = (props) => {
                         filterName={props.filterName}
                         label={optionsList[option]}
                         status={statusList[option]}
-                        onFilterClick={props.onFilterClick}
                     />
                 </Row>
             ))}

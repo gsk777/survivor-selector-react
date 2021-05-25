@@ -10,6 +10,7 @@ import playerList from '../player-data';
 const PlayerSearch = (props) => {
 
     const context = useContext(HomeContext);
+    const isActive = (context.activeSelector === "player") ? true : false;
 
     const customStyles = {
         valueContainer: (styles) => ({
@@ -27,8 +28,8 @@ const PlayerSearch = (props) => {
     }
 
     return (
-        <div className={"h-100" + (props.active ? " player-active" : "")} >
-            <SectionHeader section={"Player Search"} active={props.active} />
+        <div className={"h-100" + (isActive ? " player-active" : "")} >
+            <SectionHeader section={"Player Search"} active={isActive} />
             <Container className="col-10">
                 <Select
                     className="search-box pt-3 pb-4"

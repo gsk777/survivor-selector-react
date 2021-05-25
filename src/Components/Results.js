@@ -10,7 +10,7 @@ import SeasonList from './SeasonList';
 
 import seasonData, { numSeasons } from '../season-data';
 
-const Results = (props) => {
+const Results = () => {
 
     const context = useContext(HomeContext);
 
@@ -56,7 +56,7 @@ const Results = (props) => {
     }
     
     const seasonList = [];
-    switch (props.active) {
+    switch (context.activeSelector) {
         case "tiers":
             for (var t = 1; t <= numSeasons; t++) {
                 if (seasonData.get(t).tier <= context.selectedTier) {

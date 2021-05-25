@@ -45,9 +45,10 @@ filtersData.set(4, {
     }
 });
 
-const Filters = (props) => {
+const Filters = () => {
 
     const context = useContext(HomeContext);
+    const isActive = (context.activeSelector === "filters") ? true : false;
 
     const updateStatus = (status) => {
         filtersData.set(1, {
@@ -76,8 +77,8 @@ const Filters = (props) => {
 
     return (
         <>
-            <SectionHeader section={"Filters"} active={props.active} />
-            <Container fluid className={props.active ? "filters-active" : ""} >
+            <SectionHeader section={"Filters"} active={isActive} />
+            <Container fluid className={isActive ? "filters-active" : ""} >
                 <Container className="pb-1">
                     <Row noGutters >
                         {filtersList.slice(0, 2).map(f => (
@@ -85,7 +86,6 @@ const Filters = (props) => {
                                 <FilterGroup
                                     filterName={filtersData.get(f).filterName}
                                     filterOptions={filtersData.get(f).filterOptions}
-                                    onFilterClick={props.onFilterClick}
                                 />
                             </Col>
                         ))}
@@ -96,7 +96,6 @@ const Filters = (props) => {
                                 <FilterGroup
                                     filterName={filtersData.get(f).filterName}
                                     filterOptions={filtersData.get(f).filterOptions}
-                                    onFilterClick={props.onFilterClick}
                                 />
                             </Col>
                         ))}

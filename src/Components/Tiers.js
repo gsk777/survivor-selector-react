@@ -40,9 +40,10 @@ tiersData.set(4, {
     imageOff: tier_four_fade
 });
 
-const Tiers = (props) => {
+const Tiers = () => {
 
     const context = useContext(HomeContext);
+    const isActive = (context.activeSelector === "tiers") ? true : false;
 
     const buildTierImages = (tier) => {
         const imageList = []
@@ -72,8 +73,8 @@ const Tiers = (props) => {
 
     return (
         <>
-            <SectionHeader section={"Watchlists"} active={props.active} />
-            <Container fluid className={props.active ? "tiers-active" : ""} >
+            <SectionHeader section={"Watchlists"} active={isActive} />
+            <Container fluid className={isActive ? "tiers-active" : ""} >
                 <Container className="py-4">
                     <Row noGutters>
                         {tiersList.map(t => (
@@ -82,7 +83,6 @@ const Tiers = (props) => {
                                 tier={t}
                                 image={tierImages[t-1]}
                                 selected={tiersData.get(t).selected}
-                                onClick={props.onTierClick}
                             />
                         ))}
                     </Row>

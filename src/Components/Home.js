@@ -109,30 +109,33 @@ const Home = () => {
         }
     }
 
+    const ContextValue = {
+        activeSelector,
+        selectedTier,
+        filterStatus,
+        selectedPlayer,
+        listView,
+        onTierClick,
+        onFilterClick
+    };
+
     return (
-        <HomeContext.Provider value={{ selectedTier, filterStatus, selectedPlayer, listView }}>
+        <HomeContext.Provider value={ ContextValue }>
             <div>
                 <br/>
                 <Row className="justify-content-center mx-0">
                     <Col lg={10}>
-                        <Tiers
-                            onTierClick={onTierClick}
-                            active={(activeSelector === "tiers" ? true : false)}
-                        />
+                        <Tiers/>
                     </Col>
                 </Row>
                 <Row className="justify-content-center mx-0">
                     <Col md={7} lg={6}>
-                        <Filters
-                            onFilterClick={onFilterClick}
-                            active={(activeSelector === "filters" ? true : false)}
-                        />
+                        <Filters/>
                     </Col>
                     <Col md={5} lg={4}>
                         <PlayerSearch
                             onPlayerSearchClick={onPlayerSearchClick}
                             onPlayerSelect={onPlayerSelect}
-                            active={(activeSelector === "player" ? true : false)}
                         />
                     </Col>
                 </Row>
@@ -145,9 +148,7 @@ const Home = () => {
                 </Row>
                 <Row className="justify-content-center mx-0">
                     <Col xs={12} md={12} lg={10}>
-                        <Results
-                            active={activeSelector}
-                        />
+                        <Results/>
                     </Col>
                 </Row>
             </div>

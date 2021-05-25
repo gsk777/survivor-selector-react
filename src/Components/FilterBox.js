@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { HomeContext } from './Home';
 
 import '../Styles/FilterBox.css';
 
 const FilterBox = (props) => {
+
+    const context = useContext(HomeContext);
+
     return (
         <>
             <label className="filter-box">
@@ -10,7 +14,7 @@ const FilterBox = (props) => {
                     type="checkbox"
                     className="filter-box mr-2"
                     checked={props.status}
-                    onChange={() => props.onFilterClick(props.filterName, props.label, props.status)}
+                    onChange={() => context.onFilterClick(props.filterName, props.label, props.status)}
                 />
                 {props.label}
             </label>

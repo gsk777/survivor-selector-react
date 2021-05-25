@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { HomeContext } from './Home';
 import Col from 'react-bootstrap/Col';
 
 import '../Styles/TierButton.css';
 
 const TierButton = (props) => {
+
+    const context = useContext(HomeContext);
 
     const [inHover, setHover] = useState(false);
 
@@ -20,7 +23,7 @@ const TierButton = (props) => {
                 className={ "w-100 " + (props.selected || inHover ? tierOutlines[props.tier] : "tier-outline-off") }
                 src={props.image}
                 alt=""
-                onClick={() => props.onClick(props.tier)}
+                onClick={() => context.onTierClick(props.tier)}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
             />
