@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MyWLContext } from './MyWatchlist';
 import Select from 'react-select';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -16,6 +17,8 @@ const SelectWatchlist = (props) => {
         {value: "Only the Best", label: "Only the Best"}
     ];
 
+    const context = useContext(MyWLContext);
+
     return (
         <Form>
             <Row>
@@ -23,7 +26,7 @@ const SelectWatchlist = (props) => {
                     <Select
                         className="wl-select"
                         placeholder={"Select a watchlist..."}
-                        defaultValue={props.list}
+                        defaultValue={context.selectedList}
                         isSearchable={false}
                         options={watchlists}
                         onChange={props.onListSelect}

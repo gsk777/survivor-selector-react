@@ -10,6 +10,8 @@ import ToggleInactive from './ToggleInactive';
 
 import seasonData, { numSeasons } from '../season-data';
 
+export const MyWLContext = React.createContext();
+
 const MyWatchlist = () => {
 
     const [selectedList, setSelectedList] = useState("empty");
@@ -32,25 +34,25 @@ const MyWatchlist = () => {
         const updatedWL = {...userWL};
         switch (list) {
             case "All 40":
-                for (var i = 1; i <= numSeasons; i++) {
-                    updatedWL[i] = "active";
+                for (var a = 1; a <= numSeasons; a++) {
+                    updatedWL[a] = "active";
                 }
                 break;
             case "Keep the Scraps":
-                for (var i = 1; i <= numSeasons; i++) {
-                    if (seasonData.get(i).tier <= 3) {
-                        updatedWL[i] = "active";
+                for (var k = 1; k <= numSeasons; k++) {
+                    if (seasonData.get(k).tier <= 3) {
+                        updatedWL[k] = "active";
                     } else {
-                        updatedWL[i] = "inactive";
+                        updatedWL[k] = "inactive";
                     }
                 }
                 break;
             case "History of Survivor":
-                for (var i = 1; i <= numSeasons; i++) {
-                    if (seasonData.get(i).tier <= 2) {
-                        updatedWL[i] = "active";
+                for (var h = 1; h <= numSeasons; h++) {
+                    if (seasonData.get(h).tier <= 2) {
+                        updatedWL[h] = "active";
                     } else {
-                        updatedWL[i] = "inactive";
+                        updatedWL[h] = "inactive";
                     }
                 }
                 break;
@@ -63,6 +65,8 @@ const MyWatchlist = () => {
                     }
                 }
                 break;
+            default:
+                throw new Error('Unexpected value for selected list');
         }
         setUserWL({...updatedWL});
         await axios.put('http://localhost:4000/watchlist', {...updatedWL});
@@ -87,6 +91,8 @@ const MyWatchlist = () => {
             case "watched":
                 updatedWL[season] = "active";
                 break;
+            default:
+                throw new Error('Unexpected value for userWL season status');
         }
         setUserWL({...updatedWL})
         await axios.put('http://localhost:4000/watchlist', {...updatedWL});
@@ -104,14 +110,24 @@ const MyWatchlist = () => {
             case "watched":
                 updatedWL[season] = "inactive";
                 break;
+            default:
+                throw new Error('Unexpected value for userWL season status');
         }
         setUserWL({...updatedWL});
         await axios.put('http://localhost:4000/watchlist', {...updatedWL});
     }
 
+    const ContextValue = {
+        selectedList,
+        userWL,
+        hideInactive,
+        onSeasonWatchedToggle,
+        onSeasonActiveToggle
+    };
+
     return (
-        <>
-        <br/>
+        <MyWLContext.Provider value={ ContextValue }>
+            <br/>
             <Row className="justify-content-center mx-0">
                 <Col lg={10}>
                     <SectionHeader section={"My Watchlist"} active={true} />
@@ -122,36 +138,29 @@ const MyWatchlist = () => {
                     <SelectWatchlist
                         onListSelect={onListSelect}
                         onListSubmit={onListSubmit}
-                        list={selectedList}
                     />
                 </Col>
             </Row>
             <Row className="justify-content-center mx-0">
                 <Col xs={8} lg={6} className="pt-3">
-                    <WatchlistInfo watchlist={selectedList}/>
+                    <WatchlistInfo/>
                 </Col>
             </Row>
             <Row className="justify-content-center mx-0">
                 <Col md={10} lg={8} xl={11}>
                     <ToggleInactive
-                        checked={hideInactive}
                         toggleHideInactive={onInactiveToggle}
                     />
                 </Col>
             </Row>
             <Row className="justify-content-center pt-1 mx-0">
                 <Col md={10} lg={8} xl={11}>
-                    <WatchlistWindow
-                        userWL={userWL}
-                        hideInactive={hideInactive}
-                        onSeasonWatchedToggle={onSeasonWatchedToggle}
-                        onSeasonActiveToggle={onSeasonActiveToggle}
-                    />
+                    <WatchlistWindow/>
                 </Col>
             </Row>
             <br/>
             <br/>
-        </>
+        </MyWLContext.Provider>
     )
 };
 

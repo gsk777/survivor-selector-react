@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MyWLContext } from './MyWatchlist';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
 const ToggleInactive = (props) => {
+
+    const context = useContext(MyWLContext);
+
     return (
         <Container fluid>
             <Row className="justify-content-end pt-4 pr-5">
@@ -10,7 +14,7 @@ const ToggleInactive = (props) => {
                     <input
                         type="checkbox"
                         className="cursor mr-2"
-                        checked={props.checked}
+                        checked={context.hideInactive}
                         onChange={props.toggleHideInactive}
                     />
                     Hide Inactive

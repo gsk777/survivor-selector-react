@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MyWLContext } from './MyWatchlist';
 import { IconContext } from 'react-icons';
 import { TiInfo } from 'react-icons/ti';
 
-const WatchlistInfo = (props) => {
+const WatchlistInfo = () => {
 
     const listInfo = {
         "All 40": "All 40 seasons of Survivor. Get comfy.",
@@ -11,12 +12,14 @@ const WatchlistInfo = (props) => {
         "Only the Best": "Greatest Hits - Only the best!"
     }
 
+    const context = useContext(MyWLContext);
+
     return (
         <>
             <IconContext.Provider value={{ size: "2em", color: "#0099ff" }}>
-                <h6 className={"text-light text-center" + ((props.watchlist === "empty") ? " d-none" : "")}>
-                    <TiInfo className={(props.watchlist === "empty") ? "d-none" : ""}/>
-                    {listInfo[props.watchlist]}
+                <h6 className={"text-light text-center" + ((context.selectedList === "empty") ? " d-none" : "")}>
+                    <TiInfo className={(context.selectedList === "empty") ? "d-none" : ""}/>
+                    {listInfo[context.selectedList]}
                 </h6>
             </IconContext.Provider>
         </>

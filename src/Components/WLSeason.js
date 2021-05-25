@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { MyWLContext } from './MyWatchlist';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -20,6 +21,9 @@ const WLSeason = (props) => {
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
+    const context = useContext(MyWLContext);
+    const seasonStatus = context.userWL[props.season];
+
     const seasonColor = seasonData.get(props.season).seasonColor;
 
     return (
@@ -27,7 +31,7 @@ const WLSeason = (props) => {
         <Container
             className={
                 "wlseason-container rounded" +
-                ((props.seasonStatus === "inactive") ? " wlseason-inactive" : "")
+                ((seasonStatus === "inactive") ? " wlseason-inactive" : "")
             }
             style={{borderColor: seasonColor}}
             onClick={isMobile ? handleShow : () => (false)}
@@ -47,8 +51,8 @@ const WLSeason = (props) => {
                             <input
                                 type="checkbox"
                                 className="cursor mr-1"
-                                checked={(props.seasonStatus === "watched") ? true : false}
-                                onChange={() => props.onSeasonWatchedToggle(props.season)}
+                                checked={(seasonStatus === "watched") ? true : false}
+                                onChange={() => context.onSeasonWatchedToggle(props.season)}
                             />
                             Watched
                         </label>
@@ -56,8 +60,8 @@ const WLSeason = (props) => {
                             <input
                                 type="checkbox"
                                 className="cursor mr-1"
-                                checked={(props.seasonStatus === "active" || props.seasonStatus === "watched") ? true : false}
-                                onChange={() => props.onSeasonActiveToggle(props.season)}
+                                checked={(seasonStatus === "active" || seasonStatus === "watched") ? true : false}
+                                onChange={() => context.onSeasonActiveToggle(props.season)}
                             />
                             Active
                         </label>
@@ -71,7 +75,7 @@ const WLSeason = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <div className={"watched-container w-100 h-100" + ((props.seasonStatus !== "watched") ? " d-none" : "")}>
+                    <div className={"watched-container w-100 h-100" + ((seasonStatus !== "watched") ? " d-none" : "")}>
                         <div className="watched h-100 d-flex align-items-center justify-content-center">
                             <IconContext.Provider value={{ color: seasonColor }}>
                                 <IoCheckmarkSharp className="checkmark"/>
@@ -106,8 +110,8 @@ const WLSeason = (props) => {
                             <input
                                 type="checkbox"
                                 className="cursor mr-1"
-                                checked={(props.seasonStatus === "watched") ? true : false}
-                                onChange={() => props.onSeasonWatchedToggle(props.season)}
+                                checked={(seasonStatus === "watched") ? true : false}
+                                onChange={() => context.onSeasonWatchedToggle(props.season)}
                             />
                             Watched
                         </label>
@@ -115,8 +119,8 @@ const WLSeason = (props) => {
                             <input
                                 type="checkbox"
                                 className="cursor mr-1"
-                                checked={(props.seasonStatus === "active" || props.seasonStatus === "watched") ? true : false}
-                                onChange={() => props.onSeasonActiveToggle(props.season)}
+                                checked={(seasonStatus === "active" || seasonStatus === "watched") ? true : false}
+                                onChange={() => context.onSeasonActiveToggle(props.season)}
                             />
                             Active
                         </label>
