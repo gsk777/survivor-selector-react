@@ -80,7 +80,7 @@ const MyWatchlist = () => {
         toggleHideInactive(!hideInactive);
     }
 
-    async function onSeasonWatchedToggle(season) {
+    const onSeasonWatchedToggle = async (season) => {
         const updatedWL = {...userWL};
         switch (userWL[season]) {
             case "active":
@@ -98,7 +98,7 @@ const MyWatchlist = () => {
         await axios.put('http://localhost:4000/watchlist', {...updatedWL});
     }
 
-    async function onSeasonActiveToggle(season) {
+    const onSeasonActiveToggle = async (season) => {
         const updatedWL = {...userWL};
         switch (userWL[season]) {
             case "active":

@@ -26,6 +26,8 @@ const WLSeason = (props) => {
 
     const seasonColor = seasonData.get(props.season).seasonColor;
 
+    console.log('rendering ' + props.season);
+
     return (
         <>
         <Container

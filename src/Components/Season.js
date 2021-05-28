@@ -3,7 +3,7 @@ import { BrowserView, MobileView } from 'react-device-detect';
 
 import '../Styles/Season.css';
 
-const Season = (props) => {
+const Season = React.memo((props) => {
 
     const [inHover, setHover] = useState(false);
     const [winnerText, setWinnerText] = useState(props.showWinner ? props.winner : 'Click To Reveal Winner');
@@ -57,6 +57,6 @@ const Season = (props) => {
             </div>
         </div>
     );
-}
+});
 
 export default Season;

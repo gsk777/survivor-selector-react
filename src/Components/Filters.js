@@ -75,6 +75,8 @@ const Filters = () => {
         filtersList.push(i);
     }
 
+    console.log('filters component rendering');
+
     return (
         <>
             <SectionHeader section={"Filters"} active={isActive} />

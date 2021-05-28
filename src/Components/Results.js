@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { HomeContext } from './Home';
 
 import Row from 'react-bootstrap/Row';
@@ -86,12 +86,12 @@ const Results = () => {
             throw new Error('Unexpected value for active selector');
     }
 
-    const toggleShowWinner = (season) => {
+    const toggleShowWinner = useCallback((season) => {
         seasonData.set(season, {
             ...seasonData.get(season),
             showWinner: (!seasonData.get(season).showWinner)
         });
-    }
+    }, []);
 
     return (
         <>

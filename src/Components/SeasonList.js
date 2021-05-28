@@ -7,7 +7,7 @@ import { BrowserView, MobileView } from 'react-device-detect';
 
 import '../Styles/Season.css';
 
-const SeasonList = (props) => {
+const SeasonList = React.memo((props) => {
 
     const [inHover, setHover] = useState(false);
     const [winnerText, setWinnerText] = useState(props.showWinner ? props.winner : 'Click To Reveal Winner');
@@ -62,6 +62,7 @@ const SeasonList = (props) => {
                             <img
                                 className="h-100"
                                 src={props.image}
+                                alt=""
                             />
                         </div>
                     </Col>
@@ -85,6 +86,7 @@ const SeasonList = (props) => {
                             <img
                                 className="h-100"
                                 src={props.image}
+                                alt=""
                             />
                         </div>
                     </Col>
@@ -94,6 +96,6 @@ const SeasonList = (props) => {
         </>
     )
 
-}
+});
 
 export default SeasonList;
