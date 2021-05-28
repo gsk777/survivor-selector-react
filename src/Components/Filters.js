@@ -7,75 +7,19 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import '../Styles/Filters.css';
 
-const filtersData = new Map();
-
-filtersData.set(1, {
-    filterName: "Cast Type",
-    filterOptions: {
-        "All Newbie": true,
-        "All Returnee": true,
-        "Mixed": true
-    }
-});
-
-filtersData.set(2, {
-    filterName: "Final Tribal",
-    filterOptions: {
-        "Final 2": true,
-        "Final 3": true
-    }
-});
-
-filtersData.set(3, {
-    filterName: "Starting Tribes",
-    filterOptions: {
-        "2": true,
-        "3": true,
-        "4": true
-    }
-});
-
-filtersData.set(4, {
-    filterName: "Second Chance",
-    filterOptions: {
-        "None": true,
-        "Redemption Island": true,
-        "Edge of Extinction": true,
-        "Outcasts": true
-    }
-});
-
 const Filters = () => {
 
     const context = useContext(HomeContext);
     const isActive = (context.activeSelector === "filters") ? true : false;
 
-    const updateStatus = (status) => {
-        filtersData.set(1, {
-            ...filtersData.get(1),
-            filterOptions: status['Cast Type']
-        });
-        filtersData.set(2, {
-            ...filtersData.get(2),
-            filterOptions: status['Final Tribal']
-        });
-        filtersData.set(3, {
-            ...filtersData.get(3),
-            filterOptions: status['Starting Tribes']
-        });
-        filtersData.set(4, {
-            ...filtersData.get(4),
-            filterOptions: status['Second Chance']
-        });
-    }
-    
-    updateStatus(context.filterStatus);
-    const filtersList = []
-    for (var i = 1; i <= filtersData.size; i++) {
-        filtersList.push(i);
-    }
+    const filters = {
+        1: "Cast Type",
+        2: "Final Tribal",
+        3: "Starting Tribes",
+        4: "Second Chance"
+    };
 
-    console.log('filters component rendering');
+    const filtersList = Object.keys(filters);
 
     return (
         <>
@@ -86,8 +30,8 @@ const Filters = () => {
                         {filtersList.slice(0, 2).map(f => (
                             <Col xs={6} key={f}>
                                 <FilterGroup
-                                    filterName={filtersData.get(f).filterName}
-                                    filterOptions={filtersData.get(f).filterOptions}
+                                    filterName={filters[f]}
+                                    filterOptions={context.filterStatus[filters[f]]}
                                 />
                             </Col>
                         ))}
@@ -96,8 +40,8 @@ const Filters = () => {
                         {filtersList.slice(2, 4).map(f => (
                             <Col xs={6} key={f}>
                                 <FilterGroup
-                                    filterName={filtersData.get(f).filterName}
-                                    filterOptions={filtersData.get(f).filterOptions}
+                                    filterName={filters[f]}
+                                    filterOptions={context.filterStatus[filters[f]]}
                                 />
                             </Col>
                         ))}
