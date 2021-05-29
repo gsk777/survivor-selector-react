@@ -1,6 +1,6 @@
 export function filterReducer(state, action) {
     switch (action.type) {
-        case 'update':
+        case 'UPDATE':
             return {
                 ...state,
                 [action.filter]: {
@@ -8,7 +8,7 @@ export function filterReducer(state, action) {
                     [action.label]: (!action.status)
                 }
             };
-        case 'reset':
+        case 'RESET':
             return {
                 "Cast Type": {
                     "All Newbie": true,

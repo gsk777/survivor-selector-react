@@ -44,20 +44,20 @@ const Home = () => {
     const onTierClick = (tier) => {
         setSelectedTier(tier);
         if (activeSelector === "filters") {
-            dispatch({ type: 'reset' });
+            dispatch({ type: 'RESET' });
         };
         setActiveSelector("tiers");
     }
 
     const onFilterClick = (filter, label, status) => {
         setSelectedTier(0);
-        dispatch({ type: 'update', filter: filter, label: label, status: status })
+        dispatch({ type: 'UPDATE', filter, label, status })
         setActiveSelector("filters");
     }
 
     const onPlayerSearchClick = () => {
         setSelectedTier(0);
-        dispatch({ type: 'reset' });
+        dispatch({ type: 'RESET' });
         setActiveSelector("player");
     }
 

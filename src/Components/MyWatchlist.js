@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,21 +7,20 @@ import SelectWatchlist from './SelectWatchlist';
 import WatchlistInfo from './WatchlistInfo';
 import WatchlistWindow from './WatchlistWindow';
 import ToggleInactive from './ToggleInactive';
-
-import seasonData, { numSeasons } from '../season-data';
+import { userWLReducer } from '../Reducers/userWLReducer';
 
 export const MyWLContext = React.createContext();
 
 const MyWatchlist = () => {
 
     const [selectedList, setSelectedList] = useState("empty");
-    const [userWL, setUserWL] = useState({});
+    const [userWL, dispatch] = useReducer(userWLReducer, {});
     const [hideInactive, toggleHideInactive] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("http://localhost:4000/watchlist");
-            setUserWL(response.data);
+            dispatch({ type: "SET", data: response.data })
         }
         fetchData();
     }, [])
@@ -30,46 +29,8 @@ const MyWatchlist = () => {
         setSelectedList(list.value);
     }
 
-    async function updateWatchlist(list) {
-        const updatedWL = {...userWL};
-        switch (list) {
-            case "All 40":
-                for (var a = 1; a <= numSeasons; a++) {
-                    updatedWL[a] = "active";
-                }
-                break;
-            case "Keep the Scraps":
-                for (var k = 1; k <= numSeasons; k++) {
-                    if (seasonData.get(k).tier <= 3) {
-                        updatedWL[k] = "active";
-                    } else {
-                        updatedWL[k] = "inactive";
-                    }
-                }
-                break;
-            case "History of Survivor":
-                for (var h = 1; h <= numSeasons; h++) {
-                    if (seasonData.get(h).tier <= 2) {
-                        updatedWL[h] = "active";
-                    } else {
-                        updatedWL[h] = "inactive";
-                    }
-                }
-                break;
-            case "Only the Best":
-                for (var i = 1; i <= numSeasons; i++) {
-                    if (seasonData.get(i).tier === 1) {
-                        updatedWL[i] = "active";
-                    } else {
-                        updatedWL[i] = "inactive";
-                    }
-                }
-                break;
-            default:
-                throw new Error('Unexpected value for selected list');
-        }
-        setUserWL({...updatedWL});
-        await axios.put('http://localhost:4000/watchlist', {...updatedWL});
+    const updateWatchlist = (list) => {
+        dispatch({ type: "UPDATE", list });
     }
 
     const onListSubmit = () => {
@@ -80,41 +41,12 @@ const MyWatchlist = () => {
         toggleHideInactive(!hideInactive);
     }
 
-    const onSeasonWatchedToggle = async (season) => {
-        const updatedWL = {...userWL};
-        switch (userWL[season]) {
-            case "active":
-                updatedWL[season] = "watched";
-                break;
-            case "inactive":
-                break;
-            case "watched":
-                updatedWL[season] = "active";
-                break;
-            default:
-                throw new Error('Unexpected value for userWL season status');
-        }
-        setUserWL({...updatedWL})
-        await axios.put('http://localhost:4000/watchlist', {...updatedWL});
+    const onSeasonWatchedToggle = (season) => {
+        dispatch({ type: "TOGGLE_WATCHED", season });
     }
 
-    const onSeasonActiveToggle = async (season) => {
-        const updatedWL = {...userWL};
-        switch (userWL[season]) {
-            case "active":
-                updatedWL[season] = "inactive";
-                break;
-            case "inactive":
-                updatedWL[season] = "active";
-                break;
-            case "watched":
-                updatedWL[season] = "inactive";
-                break;
-            default:
-                throw new Error('Unexpected value for userWL season status');
-        }
-        setUserWL({...updatedWL});
-        await axios.put('http://localhost:4000/watchlist', {...updatedWL});
+    const onSeasonActiveToggle = (season) => {
+        dispatch({ type: "TOGGLE_ACTIVE", season });
     }
 
     const ContextValue = {
