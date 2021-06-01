@@ -29,12 +29,8 @@ const MyWatchlist = () => {
         setSelectedList(list.value);
     }
 
-    const updateWatchlist = (list) => {
-        dispatch({ type: "UPDATE", list });
-    }
-
     const onListSubmit = () => {
-        updateWatchlist(selectedList);
+        dispatch({ type: "UPDATE", list: selectedList });
     }
 
     const onInactiveToggle = () => {
