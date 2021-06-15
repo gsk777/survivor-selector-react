@@ -20,7 +20,7 @@ const MyWatchlist = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("http://localhost:4000/watchlist");
-            dispatch({ type: "SET", data: response.data })
+            dispatch({ type: "SET", data: response.data.watchlist })
         }
         fetchData();
     }, [])
