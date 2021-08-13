@@ -1,7 +1,0 @@
-React.memo to prevent re-rendering
-
-React Redux reducers
-
-Error Handling of async calls
-
-css prefixes - animations, etc...
