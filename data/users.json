@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Graham Kent",
+            "email": "gskent7@gmail.com",
+            "password": "hello"
+        },
+        {
+            "id": 2,
+            "name": "Joe Schmo",
+            "email": "joe@mail.com",
+            "password": "joe"
+        },
+        {
+            "id": 3,
+            "name": "Jane Doe",
+            "email": "jane@mail.com",
+            "password": "jane"
+        }
+    ]
+}

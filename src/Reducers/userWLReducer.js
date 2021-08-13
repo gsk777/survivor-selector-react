@@ -2,7 +2,7 @@ import seasonData, { numSeasons } from '../season-data';
 import axios from 'axios';
 
 export function userWLReducer(state, action) {
-    const buildList = (state, list) => {
+    const buildList = (state, list, token) => {
         const updatedWL = {...state};
         switch (list) {
             case "All 40":
@@ -41,12 +41,16 @@ export function userWLReducer(state, action) {
                 throw new Error('Unexpected value for selected list');
         }
         const updateData = async () => {
-            await axios.put('http://localhost:4000/watchlist', {...updatedWL});
+            await axios.put('http://localhost:4000/db', {...updatedWL}, {
+                headers: {
+                    "Authorization": token
+                }
+            });
         }
         updateData();
         return updatedWL;
     }
-    const toggleWatched = (state, season) => {
+    const toggleWatched = (state, season, token) => {
         const updatedWL = {...state};
         switch (state[season]) {
             case "active":
@@ -61,12 +65,16 @@ export function userWLReducer(state, action) {
                 throw new Error('Unexpected value for userWL season status');
         }
         const updateData = async () => {
-            await axios.put('http://localhost:4000/watchlist', {...updatedWL});
+            await axios.put('http://localhost:4000/db', {...updatedWL}, {
+                headers: {
+                    "Authorization": token
+                }
+            });
         }
         updateData();
         return updatedWL;
     }
-    const toggleActive = (state, season) => {
+    const toggleActive = (state, season, token) => {
         const updatedWL = {...state};
         switch (state[season]) {
             case "active":
@@ -82,7 +90,11 @@ export function userWLReducer(state, action) {
                 throw new Error('Unexpected value for userWL season status');
         }
         const updateData = async () => {
-            await axios.put('http://localhost:4000/watchlist', {...updatedWL});
+            await axios.put('http://localhost:4000/db', {...updatedWL}, {
+                headers: {
+                    "Authorization": token
+                }
+            });
         }
         updateData();
         return updatedWL;
@@ -92,11 +104,11 @@ export function userWLReducer(state, action) {
         case 'SET':
             return action.data;
         case 'UPDATE':
-            return buildList(state, action.list);
+            return buildList(state, action.list, action.token);
         case 'TOGGLE_WATCHED':
-            return toggleWatched(state, action.season);
+            return toggleWatched(state, action.season, action.token);
         case 'TOGGLE_ACTIVE':
-            return toggleActive(state, action.season);
+            return toggleActive(state, action.season, action.token);
         default:
             throw new Error();
     }

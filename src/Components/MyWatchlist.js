@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,9 +9,14 @@ import WatchlistWindow from './WatchlistWindow';
 import ToggleInactive from './ToggleInactive';
 import { userWLReducer } from '../Reducers/userWLReducer';
 
+import { UserContext } from '../App';
+
 export const MyWLContext = React.createContext();
 
 const MyWatchlist = () => {
+
+    const context = useContext(UserContext);
+    console.log(context.token);
 
     const [selectedList, setSelectedList] = useState("empty");
     const [userWL, dispatch] = useReducer(userWLReducer, {});
@@ -19,18 +24,22 @@ const MyWatchlist = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get("http://localhost:4000/watchlist");
-            dispatch({ type: "SET", data: response.data.watchlist })
+            const response = await axios.get("http://localhost:4000/db", {
+                headers: {
+                    "Authorization": context.token.data
+                }
+            });
+            dispatch({ type: "SET", data: response.data })
         }
         fetchData();
-    }, [])
+    }, [context.token])
 
     const onListSelect = (list) => {
         setSelectedList(list.value);
     }
 
     const onListSubmit = () => {
-        dispatch({ type: "UPDATE", list: selectedList });
+        dispatch({ type: "UPDATE", list: selectedList, token: context.token.data });
     }
 
     const onInactiveToggle = () => {
@@ -38,11 +47,11 @@ const MyWatchlist = () => {
     }
 
     const onSeasonWatchedToggle = (season) => {
-        dispatch({ type: "TOGGLE_WATCHED", season });
+        dispatch({ type: "TOGGLE_WATCHED", season, token: context.token.data });
     }
 
     const onSeasonActiveToggle = (season) => {
-        dispatch({ type: "TOGGLE_ACTIVE", season });
+        dispatch({ type: "TOGGLE_ACTIVE", season, token: context.token.data });
     }
 
     const ContextValue = {
