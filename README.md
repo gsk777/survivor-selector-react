@@ -1,4 +1,19 @@
-# Getting Started with Create React App
+# Survivor Selector React App - (In Development)
+
+Web application for fans of the long running reality show Survivor.
+
+**Current Features:**
+  * Sort and search through seasons based on different criteria (cast, rules, etc...)
+  * Create custom watchlists to track first time viewing or re-watches
+  * User login with JWT authentication
+
+**Features in Development:**
+  * "My Rankings" page to track user rankings of seasons and winners
+  * Export/Share user watchlists and rankings
+
+==============================================================================
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -6,13 +21,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+### `npm run express`
+
+Launches Express server on [http://localhost:4000](http://localhost:4000)
 
 ### `npm test`
 
