@@ -1,8 +1,18 @@
 .login-heading {
     color: white;
+    font-size: 1.5rem;
 }
 
 .login-label {
     color: #e6b800;
     font-weight: bold;
+}
+
+.question {
+    font-size: 1rem;
+}
+
+@media (min-width: 576px) {
+    .login-heading {font-size: 2rem;}
+    .question {font-size: 1.25rem;}
 }

@@ -37,17 +37,17 @@ const Login = () => {
         <Container>
             <br/>
             <Row className="justify-content-center">
-                <Col xs={8}>
+                <Col xs={12} md={10} lg={7}>
                     <h2 className="login-heading">LOGIN</h2>
                 </Col>
             </Row>
             <br/>
             <Row className="justify-content-center">
-                <Col xs={8}>
+                <Col xs={12} md={10} lg={7}>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group as={Row} controlId="enterEmail">
-                            <Form.Label className="login-label" column xs={2}>Email</Form.Label>
-                            <Col xs={10}>
+                            <Form.Label className="login-label" column xs={3} md={2}>Email</Form.Label>
+                            <Col xs={9} md={10}>
                                 <Form.Control
                                     type="email"
                                     placeholder="Enter email..."
@@ -57,8 +57,8 @@ const Login = () => {
                         </Form.Group>
                         <br/>
                         <Form.Group as={Row} controlId="enterPassword">
-                            <Form.Label className="login-label" column sm={2}>Password</Form.Label>
-                            <Col xs={10}>
+                            <Form.Label className="login-label" column xs={3} md={2}>Password</Form.Label>
+                            <Col xs={9} md={10}>
                                 <Form.Control
                                     type="password"
                                     placeholder="Password"
@@ -73,6 +73,18 @@ const Login = () => {
                             variant="light"
                             >Submit</Button>
                     </Form>
+                </Col>
+            </Row>
+            <Row className="justify-content-center pt-3">
+                <Col xs={12} md={8}>
+                    <Row>
+                        <Col xs={7} className='d-flex justify-content-end align-items-end'>
+                            <h5 className='question text-light'>Not signed up yet?</h5>
+                        </Col>
+                        <Col xs={5}>
+                            <Button variant="info">Sign Up</Button>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
         </Container>
