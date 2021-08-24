@@ -120,7 +120,7 @@ const Results = () => {
                     <Col md={6} className="px-2 pl-md-2 pr-md-1 px-lg-2">
                         <Row>
                             {(seasonList.slice(0, (Math.round(seasonList.length / 2)))).map(season => (
-                                <Col xs={12} key={season} className="pb-1">
+                                <Col xs={12} key={season} className="pb-1 pl-md-2">
                                     <SeasonList
                                         key={season.toString()}
                                         seasonNum={season}
@@ -138,7 +138,7 @@ const Results = () => {
                     <Col md={6} className="px-2 pl-md-1 pr-md-2 px-lg-2">
                         <Row>
                             {(seasonList.slice((Math.round(seasonList.length / 2)), seasonList.length)).map(season => (
-                                <Col xs={12} key={season} className="pb-1">
+                                <Col xs={12} key={season} className="pb-1 pr-md-2">
                                     <SeasonList
                                         key={season.toString()}
                                         seasonNum={season}

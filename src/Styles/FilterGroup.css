@@ -1,7 +1,12 @@
 .filter-title {
     color: #e6b800;
+    font-size: 1rem;
 }
 
 .filter-box-row {
     line-height: 1rem;
+}
+
+@media (min-width: 576px) {
+    .filter-title { font-size: 1.25rem}
 }

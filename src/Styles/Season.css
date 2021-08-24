@@ -21,7 +21,7 @@
     padding-left: 19px;
     padding-top: 40px;
     transition: transform .5s;
-    font-size: .9rem;
+    font-size: .70rem;
 }
 
 .season-name-div {
@@ -29,7 +29,7 @@
 }
 
 .season-name {
-    font-size: .9rem;
+    font-size: .8rem;
 }
 
 .logo-transition {
@@ -59,6 +59,25 @@
     position: absolute;
     text-shadow: 1px 1px 2px black;
     transition: transform .5s;
+    font-size: .7rem;
+}
+
+.middle-col {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+@media (min-width: 400px) {
+    .winners { font-size: .9rem;}
+    .season-name {font-size: .9rem;}
+}
+
+@media (min-width: 476px) {
+    .winners-list { font-size: 1rem;}
+    .middle-col {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
 }
 
 @media (min-width: 576px) {

@@ -43,7 +43,7 @@ const SeasonList = React.memo((props) => {
                     </Col>
                     <Col
                         xs={7} md={9}
-                        className="d-flex justify-content-center align-items-center"
+                        className="d-flex middle-col justify-content-center align-items-center"
                         onClick={() => toggleWinner(props.seasonNum)}
                         onMouseEnter={() => setHover(true)}
                         onMouseLeave={() => setHover(false)}
