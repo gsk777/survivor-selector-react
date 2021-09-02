@@ -1,8 +1,7 @@
 import seasonData, { numSeasons } from '../season-data';
-import axios from 'axios';
 
 export function userWLReducer(state, action) {
-    const buildList = (state, list, token) => {
+    const buildList = (state, list) => {
         const updatedWL = {...state};
         switch (list) {
             case "All 40":
@@ -40,18 +39,11 @@ export function userWLReducer(state, action) {
             default:
                 throw new Error('Unexpected value for selected list');
         }
-        const updateData = async () => {
-            await axios.put('http://localhost:4000/db', {...updatedWL}, {
-                headers: {
-                    "Authorization": token
-                }
-            });
-        }
-        updateData();
         return updatedWL;
     }
-    const toggleWatched = (state, season, token) => {
-        const updatedWL = {...state};
+    const toggleWatched = (state, season) => {
+        let updatedWL = {...state};
+        console.log(updatedWL);
         switch (state[season]) {
             case "active":
                 updatedWL[season] = "watched";
@@ -64,17 +56,9 @@ export function userWLReducer(state, action) {
             default:
                 throw new Error('Unexpected value for userWL season status');
         }
-        const updateData = async () => {
-            await axios.put('http://localhost:4000/db', {...updatedWL}, {
-                headers: {
-                    "Authorization": token
-                }
-            });
-        }
-        updateData();
         return updatedWL;
     }
-    const toggleActive = (state, season, token) => {
+    const toggleActive = (state, season) => {
         const updatedWL = {...state};
         switch (state[season]) {
             case "active":
@@ -89,14 +73,6 @@ export function userWLReducer(state, action) {
             default:
                 throw new Error('Unexpected value for userWL season status');
         }
-        const updateData = async () => {
-            await axios.put('http://localhost:4000/db', {...updatedWL}, {
-                headers: {
-                    "Authorization": token
-                }
-            });
-        }
-        updateData();
         return updatedWL;
     }
     
@@ -104,11 +80,11 @@ export function userWLReducer(state, action) {
         case 'SET':
             return action.data;
         case 'UPDATE':
-            return buildList(state, action.list, action.token);
+            return buildList(state, action.list);
         case 'TOGGLE_WATCHED':
-            return toggleWatched(state, action.season, action.token);
+            return toggleWatched(state, action.season);
         case 'TOGGLE_ACTIVE':
-            return toggleActive(state, action.season, action.token);
+            return toggleActive(state, action.season);
         default:
             throw new Error();
     }

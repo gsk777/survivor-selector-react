@@ -31,7 +31,6 @@ const usersRoutes = (app, fs) => {
             const parsed = JSON.parse(data)["users"];
             const [userId, index, valid] = validateUser(parsed, req.body.email, req.body.password);
             
-
             if (valid) {
                 const payload = {
                     "name": parsed[index].name,
@@ -39,7 +38,7 @@ const usersRoutes = (app, fs) => {
                 }
                 const token = jwt.sign(payload, {key: PRIVATE_KEY, passphrase: "pebble18"}, {
                     algorithm: 'RS256',
-                    expiresIn: 30000,
+                    expiresIn: 60,
                     subject: userId.toString()
                 });
                 console.log(token);

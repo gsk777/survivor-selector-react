@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer, useContext } from 'react';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Redirect } from 'react-router';
 import SectionHeader from './SectionHeader';
 import SelectWatchlist from './SelectWatchlist';
 import WatchlistInfo from './WatchlistInfo';
@@ -16,30 +17,59 @@ export const MyWLContext = React.createContext();
 const MyWatchlist = () => {
 
     const context = useContext(UserContext);
-    console.log(context.token);
 
     const [selectedList, setSelectedList] = useState("empty");
     const [userWL, dispatch] = useReducer(userWLReducer, {});
     const [hideInactive, toggleHideInactive] = useState(false);
 
+    // pull user data on initial render
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get("http://localhost:4000/db", {
-                headers: {
-                    "Authorization": context.token.data
-                }
-            });
-            dispatch({ type: "SET", data: response.data })
+            console.log('fetching data...');
+            try {
+                const response = await axios.get("http://localhost:4000/db", {
+                    headers: {
+                        "Authorization": context.token.data
+                    }
+                });
+                dispatch({ type: "SET", data: response.data })
+            } catch (error) {
+                console.log('token not verified');
+                console.log(error);
+                localStorage.removeItem('token');
+                context.setToken(undefined);
+            }
         }
         fetchData();
-    }, [context.token])
+    }, [context]);
+
+    // update user data after userWL state changes
+    useEffect(() => {
+        const saveData = async () => {
+            console.log('saving data...');
+            try {
+                await axios.put('http://localhost:4000/db', {...userWL}, {
+                    headers: {
+                        "Authorization": context.token.data
+                    }
+                });
+            } catch (error) {
+                console.log(error);
+                localStorage.removeItem('token');
+                context.setToken(undefined);
+            }
+        }
+        if (Object.keys(userWL).length > 0) {
+            saveData();
+        }
+    }, [userWL, context]);
 
     const onListSelect = (list) => {
         setSelectedList(list.value);
     }
 
     const onListSubmit = () => {
-        dispatch({ type: "UPDATE", list: selectedList, token: context.token.data });
+        dispatch({ type: "UPDATE", list: selectedList });
     }
 
     const onInactiveToggle = () => {
@@ -47,11 +77,11 @@ const MyWatchlist = () => {
     }
 
     const onSeasonWatchedToggle = (season) => {
-        dispatch({ type: "TOGGLE_WATCHED", season, token: context.token.data });
+        dispatch({ type: "TOGGLE_WATCHED", season: season });
     }
 
     const onSeasonActiveToggle = (season) => {
-        dispatch({ type: "TOGGLE_ACTIVE", season, token: context.token.data });
+        dispatch({ type: "TOGGLE_ACTIVE", season: season });
     }
 
     const ContextValue = {
@@ -61,6 +91,10 @@ const MyWatchlist = () => {
         onSeasonWatchedToggle,
         onSeasonActiveToggle
     };
+
+    if (context.token === undefined) {
+        return <Redirect to='/login' />
+    }
 
     return (
         <MyWLContext.Provider value={ ContextValue }>
