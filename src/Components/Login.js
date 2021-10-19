@@ -13,21 +13,25 @@ import '../Styles/Login.css';
 const Login = () => {
     const context = useContext(UserContext);
 
+    const [validated, setValidated] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [signup, toggleSignup] = useState(false);
 
     const handleSubmit = async (event) => {
+        const form = event.currentTarget;
         try {
             event.preventDefault();
-            const response = await axios.post('http://localhost:4000/users', {"email": email, "password": password});
+            const response = await axios.post('http://localhost:4000/login', {"email": email, "password": password});
             context.setToken(response);
             return <Redirect to='/' />
         } catch (error) {
             console.log(error);
+            form.enterPassword.setCustomValidity("Email/password combination not valid. Try Again.")
             setError("Email/password combination not valid. Try Again.");
         }
+        setValidated(true);
     };
 
     const onSignUpClick = () => {
@@ -53,11 +57,12 @@ const Login = () => {
             <br/>
             <Row className="justify-content-center">
                 <Col xs={12} md={10} lg={7}>
-                    <Form onSubmit={handleSubmit}>
+                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
                         <Form.Group as={Row} controlId="enterEmail">
                             <Form.Label className="login-label" column xs={3} md={2}>Email</Form.Label>
                             <Col xs={9} md={10}>
                                 <Form.Control
+                                    required
                                     type="email"
                                     placeholder="Enter email..."
                                     onChange={(e) => setEmail(e.target.value)}
@@ -69,11 +74,12 @@ const Login = () => {
                             <Form.Label className="login-label" column xs={3} md={2}>Password</Form.Label>
                             <Col xs={9} md={10}>
                                 <Form.Control
+                                    required
                                     type="password"
                                     placeholder="Password"
                                     onChange={(e) => setPassword(e.target.value)}
                                 ></Form.Control>
-                                <h6 className="text-danger text-center mt-2">{error}</h6>
+                                <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
                             </Col>
                         </Form.Group>
                         <br/>
