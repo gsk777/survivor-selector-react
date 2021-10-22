@@ -10,6 +10,7 @@ import { Redirect } from 'react-router';
 import { UserContext } from '../App';
 import '../Styles/Login.css';
 
+// Login page route used by Main.js
 const Login = () => {
     const context = useContext(UserContext);
 

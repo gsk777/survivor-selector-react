@@ -13,6 +13,7 @@ import '../Styles/WLSeason.css';
 
 import seasonData from '../season-data';
 
+// used by WatchlistWindow.js to render the user's watchlist seasons in list view on larger viewports
 const WLSeasonList = (props) => {
 
     const [inHover, setHover] = useState(false);
@@ -82,6 +83,7 @@ const WLSeasonList = (props) => {
                 </Col>
             </Row>
         </Container>
+        {/* Display of "Watched" and "Active" checkboxes are switched from a hover effect to a modal on mobile */}
         <MobileView>
             <Modal show={show} onHide={handleClose} size="sm" contentClassName="edit-season-modal">
                 <Modal.Header closeButton style={{backgroundColor: seasonColor}}>

@@ -32,16 +32,7 @@ const usersRoutes = (app, fs) => {
         return status;
     }
 
-    app.get('/login', (req, res) => {
-        fs.readFile(dataPath, 'utf8', (err, data) => {
-            if (err) {
-                throw err;
-            }
-            res.send(JSON.parse(data));
-        })
-    })
-
-    // Login authentication
+    // Login authentication via Login.js
     app.post('/login', (req, res) => {
         fs.readFile(dataPath, 'utf8', (err, data) => {
             if (err) {
@@ -70,7 +61,7 @@ const usersRoutes = (app, fs) => {
         })
     })
 
-    // New User Submission
+    // New User Submission via SignUp.js
     app.post('/newuser', (req, res) => {
         fs.readFile(dataPath, 'utf8', (err, data) => {
             if (err) {

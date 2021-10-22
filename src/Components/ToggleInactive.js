@@ -3,6 +3,7 @@ import { MyWLContext } from './MyWatchlist';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
+// used by MyWatchlist.js to toggle the display of inactive seasons
 const ToggleInactive = (props) => {
 
     const context = useContext(MyWLContext);

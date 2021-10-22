@@ -12,6 +12,7 @@ import ViewToggle from './ViewToggle';
 
 export const HomeContext = React.createContext();
 
+// Home page route used by Main.js
 const Home = () => {
 
     const [activeSelector, setActiveSelector] = useState("tiers");

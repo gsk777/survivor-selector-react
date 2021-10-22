@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 import '../Styles/SelectWatchlist.css';
 
+// used by MyWatchlist.js to render the selection of default watchlist templates
 const SelectWatchlist = (props) => {
 
     const watchlists = [

@@ -10,6 +10,7 @@ import { numSeasons } from '../season-data';
 
 import '../Styles/WatchlistWindow.css';
 
+// used by MyWatchlist.js to render the seasons of the user's current watchlist
 const WatchlistWindow = () => {
 
     const context = useContext(MyWLContext);
@@ -43,6 +44,7 @@ const WatchlistWindow = () => {
                     <h4>No active watchlist - Please select and add from above</h4>
                 </Col>
             </Row>
+            {/* TILED VIEW - Active for larger viewports */}
             <div className="tiled">
                 <Row className="py-2 mx-n1">
                     {seasonsArray.map(s => (
@@ -52,6 +54,7 @@ const WatchlistWindow = () => {
                     ))}
                 </Row>
             </div>
+            {/* LIST VIEW - Active for smaller viewports*/}
             <div className="list">
                 <Row>
                     <Col md={6} sm={6}>

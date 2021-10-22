@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import '../Styles/SectionHeader.css';
 import DarkOverlay from './DarkOverlay';
 
+// used by several components as a section header
 const SectionHeader = (props) => {
     return (
         <div className="position-relative">

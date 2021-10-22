@@ -3,6 +3,7 @@ import { MyWLContext } from './MyWatchlist';
 import { IconContext } from 'react-icons';
 import { TiInfo } from 'react-icons/ti';
 
+// used by MyWatchlist.js to render descriptions of the selected watchlist template
 const WatchlistInfo = () => {
 
     const listInfo = {

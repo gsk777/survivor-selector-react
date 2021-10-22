@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 
 import '../Styles/TierButton.css';
 
+// used by Tiers.js to render all tier options
 const TierButton = (props) => {
 
     const context = useContext(HomeContext);

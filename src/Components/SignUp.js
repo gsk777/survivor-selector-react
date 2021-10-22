@@ -10,6 +10,7 @@ import axios from 'axios';
 import { UserContext } from '../App';
 import '../Styles/SignUp.css';
 
+// Signup page route used by Main.js
 const SignUp = () => {
 
     const context = useContext(UserContext);
@@ -27,7 +28,6 @@ const SignUp = () => {
 
     const handleSubmit = async (event) => {
         const form = event.currentTarget;
-        //form.enterUserName.setCustomValidity("testing validation");
         // check username and email against DB to find duplicates
         try {
             event.preventDefault();

@@ -5,6 +5,7 @@ const dbRoutes = (app, fs) => {
 
     const PUBLIC_KEY = fs.readFileSync('./jwtRS256.key.pub');
 
+    // request via MyWatchlist.js to verify user & access watchlist data from db.json
     app.get('/db', (req, res) => {
         const token = (req.headers.authorization);
 
@@ -25,6 +26,7 @@ const dbRoutes = (app, fs) => {
         })
     });
 
+    // request via MyWatchlist.js to verify user & update watchlist data in db.json
     app.put('/db', (req, res) => {
         const token = (req.headers.authorization);
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// custom hook for handling JWTs
 function useToken() {
     const getToken = () => {
       const tokenString = localStorage.getItem('token');

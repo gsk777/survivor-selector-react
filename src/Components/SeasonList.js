@@ -7,6 +7,7 @@ import { BrowserView, MobileView } from 'react-device-detect';
 
 import '../Styles/Season.css';
 
+// used by Results.js on home page to render each selected season (list view)
 const SeasonList = React.memo((props) => {
 
     const [inHover, setHover] = useState(false);
@@ -69,6 +70,7 @@ const SeasonList = React.memo((props) => {
                 </Row>
             </Container>
         </BrowserView>
+        {/* Mobile view disables hover/reveal winner effects */}
         <MobileView>
             <Container fluid>
                 <Row className="text-light font-weight-bold rounded" style={{ backgroundColor: props.color}}>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import '../Styles/Header.css';
 
+// used by App.js as constant header/navigation
 const Header = (props) => {
     return (
             <Navbar expand="md" variant="dark">

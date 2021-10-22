@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import '../Styles/Filters.css';
 
+// used by Home.js to render the Filters section on the homepage
 const Filters = () => {
 
     const context = useContext(HomeContext);

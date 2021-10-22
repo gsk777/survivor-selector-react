@@ -3,6 +3,7 @@ import { BrowserView, MobileView } from 'react-device-detect';
 
 import '../Styles/Season.css';
 
+// used by Results.js on home page to render each selected season (tiled view)
 const Season = React.memo((props) => {
 
     const [inHover, setHover] = useState(false);
@@ -45,6 +46,7 @@ const Season = React.memo((props) => {
                     onMouseLeave={() => setHover(false)}
                 />
             </BrowserView>
+            {/* Mobile view disables hover/reveal winner effects */}
             <MobileView>
                 <img
                     className="w-100 mt-1"

@@ -40,6 +40,7 @@ tiersData.set(4, {
     imageOff: tier_four_fade
 });
 
+// used by Home.js to render the Tiers section on the homepage
 const Tiers = () => {
 
     const context = useContext(HomeContext);

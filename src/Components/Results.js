@@ -10,6 +10,7 @@ import SeasonList from './SeasonList';
 
 import seasonData, { numSeasons } from '../season-data';
 
+// used by Home.js to render season results based on active search parameters
 const Results = () => {
 
     const context = useContext(HomeContext);

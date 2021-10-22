@@ -3,6 +3,7 @@ import { HomeContext } from './Home';
 
 import '../Styles/FilterBox.css';
 
+// used by FilterGroup.js to render individual checkboxes
 const FilterBox = (props) => {
 
     const context = useContext(HomeContext);

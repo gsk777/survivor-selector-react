@@ -7,6 +7,7 @@ import SectionHeader from './SectionHeader';
 import '../Styles/PlayerSearch.css';
 import playerList from '../player-data';
 
+// used by Home.js to render the Player Search section on the homepage
 const PlayerSearch = (props) => {
 
     const context = useContext(HomeContext);

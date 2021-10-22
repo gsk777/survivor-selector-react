@@ -6,6 +6,7 @@ import SignUp from './SignUp';
 import MyWatchlist from './MyWatchlist';
 import Logout from './Logout';
 
+// used by App.js as a switch for page routes/components
 const Main = () => {
     return (
         <Switch>

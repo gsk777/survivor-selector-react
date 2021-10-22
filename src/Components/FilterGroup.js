@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row';
 import FilterBox from '../Components/FilterBox';
 import '../Styles/FilterGroup.css';
 
+// used by Filters.js to render each group of filters
 const FilterGroup = (props) => {
 
     const optionsList = Object.keys(props.filterOptions);

@@ -14,6 +14,7 @@ import { UserContext } from '../App';
 
 export const MyWLContext = React.createContext();
 
+// User Watchlist page route used by Main.js
 const MyWatchlist = () => {
 
     const context = useContext(UserContext);

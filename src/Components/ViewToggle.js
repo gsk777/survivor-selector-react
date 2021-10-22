@@ -7,6 +7,7 @@ import { IconContext } from 'react-icons';
 import { IoGrid, IoList } from 'react-icons/io5';
 import '../Styles/ViewToggle.css';
 
+// used by Home.js to toggle between tiled and list views
 const ViewToggle = (props) => {
 
     const context = useContext(HomeContext);

@@ -8,6 +8,7 @@ import { Redirect } from 'react-router';
 import { UserContext } from '../App';
 import '../Styles/Logout.css';
 
+// Logout page route used by Main.js
 const Logout = () => {
     const context = useContext(UserContext);
 
