@@ -4,6 +4,7 @@ const usersRoutes = (app, fs) => {
     const dataPath = './data/users.json';
 
     const PRIVATE_KEY = fs.readFileSync('./jwtRS256.key');
+    const PUBLIC_KEY = fs.readFileSync('./jwtRS256.key.pub');
 
     // Validation for user on Login attempt
     const validateUser = (users, email, password) => {
@@ -88,6 +89,22 @@ const usersRoutes = (app, fs) => {
                 })
             } else {
                 res.status(200).send(status);
+            }
+        })
+    })
+
+    // Verifying local user token
+    app.get('/verify', (req, res) => {
+        const token = (req.headers.authorization);
+
+        jwt.verify(token, PUBLIC_KEY, {format: 'PKCS8', algorithms: ['RS256']}, (err, decoded) => {
+            console.log(decoded);
+            if (err !== null) {
+                console.log(err.message);
+                throw new Error('token expired');
+            } else {
+                console.log('token verified');
+                res.sendStatus(200);
             }
         })
     })

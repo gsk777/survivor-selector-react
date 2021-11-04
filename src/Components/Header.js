@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import axios from 'axios';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import { UserContext } from '../App';
 import '../Styles/Header.css';
 
 // used by App.js as constant header/navigation
 const Header = (props) => {
+    const context = useContext(UserContext);
+
+    // verify if local user token is still valid
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log('verifying token');
+            try {
+                const response = await axios.get("http://localhost:4000/verify", {
+                    headers: {
+                        "Authorization": context.token.data
+                    }
+                });
+                console.log(response);
+            } catch (error) {
+                console.log('token not verified');
+                console.log(error);
+                localStorage.removeItem('token');
+                context.setToken(undefined);
+            }
+        }
+        fetchData();
+    }, [context]);
+
     return (
             <Navbar expand="md" variant="dark">
                 <Navbar.Brand className="text-center">
