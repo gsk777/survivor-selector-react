@@ -7,6 +7,8 @@ import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { Redirect } from 'react-router';
 
+import ResetPasswordModal from './ResetPasswordModal';
+
 import { UserContext } from '../App';
 import '../Styles/Login.css';
 
@@ -19,6 +21,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [signup, toggleSignup] = useState(false);
+    const [resetModal, toggleResetModal] = useState(false);
 
     const handleSubmit = async (event) => {
         const form = event.currentTarget;
@@ -41,6 +44,14 @@ const Login = () => {
 
     if (signup === true) {
         return <Redirect to='/signup' />
+    }
+
+    const onForgotPasswordClick = () => {
+        toggleResetModal(true);
+    }
+
+    const handleCloseModal = () => {
+        toggleResetModal(false);
     }
 
     if (context.token) {
@@ -94,15 +105,19 @@ const Login = () => {
             <Row className="justify-content-center pt-3">
                 <Col xs={12} md={8}>
                     <Row>
-                        <Col xs={7} className='d-flex justify-content-end align-items-end'>
-                            <h5 className='question text-light'>Not signed up yet?</h5>
+                        <Col xs={6} className='d-flex justify-content-end'>
+                            <Button variant="info" size="sm" onClick={onSignUpClick}>New User</Button>
                         </Col>
-                        <Col xs={5}>
-                            <Button variant="info" onClick={onSignUpClick}>Sign Up</Button>
+                        <Col xs={6}>
+                            <Button variant="info" size="sm" onClick={onForgotPasswordClick}>Forgot Password</Button>
                         </Col>
                     </Row>
                 </Col>
             </Row>
+            <ResetPasswordModal
+                show={resetModal}
+                close={handleCloseModal}
+            ></ResetPasswordModal>
         </Container>
     )
 }

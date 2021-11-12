@@ -33,6 +33,16 @@ const usersRoutes = (app, fs) => {
         return status;
     }
 
+    // Confirming user email exists for reset password request
+    const validateEmail = (users, email) => {
+        for (let i = 0; i < users.length; i++) {
+            if (users[i]["email"] === email) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Login authentication via Login.js
     app.post('/login', (req, res) => {
         fs.readFile(dataPath, 'utf8', (err, data) => {
@@ -93,6 +103,24 @@ const usersRoutes = (app, fs) => {
         })
     })
 
+    // Sending reset password email
+    app.post('/resetPassword', (req, res) => {
+        fs.readFile(dataPath, 'utf8', (err, data) => {
+            if (err) {
+                throw err;
+            }
+            const parsed = JSON.parse(data);
+            const valid = validateEmail(parsed["users"], req.body.email);
+            console.log('testing if email is valid');
+
+            if (!valid) {
+                console.log('email address not found');
+                res.sendStatus(401);
+            } else {
+                res.sendStatus(200);
+            }
+        })
+    })
     // Verifying local user token
     app.get('/verify', (req, res) => {
         const token = (req.headers.authorization);
