@@ -1,4 +1,7 @@
+require('dotenv').config();
+const crypto  = require('crypto');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 const usersRoutes = (app, fs) => {
     const dataPath = './data/users.json';
@@ -37,10 +40,10 @@ const usersRoutes = (app, fs) => {
     const validateEmail = (users, email) => {
         for (let i = 0; i < users.length; i++) {
             if (users[i]["email"] === email) {
-                return true;
+                return [true, i];
             }
         }
-        return false;
+        return [false];
     }
 
     // Login authentication via Login.js
@@ -110,14 +113,49 @@ const usersRoutes = (app, fs) => {
                 throw err;
             }
             const parsed = JSON.parse(data);
-            const valid = validateEmail(parsed["users"], req.body.email);
+            const user = validateEmail(parsed["users"], req.body.email);
             console.log('testing if email is valid');
 
-            if (!valid) {
+            if (!user[0]) {
                 console.log('email address not found');
                 res.sendStatus(401);
             } else {
-                res.sendStatus(200);
+                const token = crypto.randomBytes(20).toString('hex');
+                parsed["users"][user[1]].resetPassword = {
+                    "token": token,
+                    "expires": Date.now() + 360000
+                };
+                fs.writeFile(dataPath, JSON.stringify(parsed), 'utf8', err => {
+                    if (err) {
+                        throw err;
+                    }
+                });
+                
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: `${process.env.GMAIL_ADDRESS}`,
+                        pass: `${process.env.GMAIL_PASSWORD}`
+                    }
+                });
+
+                const mailOptions = {
+                    from: 'survivorselector@gmail.com',
+                    to: `${req.body.email}`,
+                    subject: 'Reset Password',
+                    text:
+                        `TEST TEST TEST`
+                };
+
+                transporter.sendMail(mailOptions, function(err, response) {
+                    if (err) {
+                        console.log('error sending email: ', err);
+                    } else {
+                        console.log(response);
+                        console.log('reset email sent');
+                        res.sendStatus(200);
+                    }
+                })
             }
         })
     })
