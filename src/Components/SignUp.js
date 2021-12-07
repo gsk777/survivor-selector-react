@@ -14,15 +14,10 @@ import '../Styles/SignUp.css';
 const SignUp = () => {
 
     const context = useContext(UserContext);
-    
-    const [validated, setValidated] = useState(true);
-    const [userName, setUserName] = useState("");
+
     const [userNameFeedback, setUserNameFeedback] = useState("4-15 characters (A-Z, a-z, 0-9)");
-    const [email, setEmail] = useState("");
     const [emailFeedback, setEmailFeedback] = useState("");
     const [password, setPassword] = useState("");
-    const [passwordFeedback, setPasswordFeedback] = useState("Min 6 characters");
-    const [confirm, setConfirm] = useState("");
     const [confirmFeedback, setConfirmFeedback] = useState("");
     const [signupSuccess, setSignupSuccess] = useState(false);
 
@@ -31,7 +26,7 @@ const SignUp = () => {
         // check username and email against DB to find duplicates
         try {
             event.preventDefault();
-            const response = await axios.post('http://localhost:4000/newuser', {
+            const response = await axios.post('http://localhost:4000/new_user', {
                 "username": form.enterUserName.value,
                 "email": form.enterEmail.value,
                 "password": form.enterPassword.value,
@@ -51,7 +46,7 @@ const SignUp = () => {
                 form.enterEmail.setCustomValidity("");
                 setEmailFeedback("");
             }
-            if (response.data[0] && response.data[1]) {
+            if (form.checkValidity() === true) {
                 setSignupSuccess(true);
             }
         } catch (error) {
@@ -60,7 +55,6 @@ const SignUp = () => {
     }
 
     const confirmOnChange = (e) => {
-        setConfirm(e.target.value);
         if (e.target.value !== password) {
             e.target.setCustomValidity("Passwords don't match");
             setConfirmFeedback("Password doesn't match");
@@ -70,8 +64,12 @@ const SignUp = () => {
         }
     }
 
-    if ((context.token) || (signupSuccess)) {
+    if (context.token) {
         return <Redirect to='/' />
+    }
+
+    if (signupSuccess) {
+        return <Redirect to='/login' />
     }
 
     return (
@@ -79,13 +77,13 @@ const SignUp = () => {
             <br/>
             <Row className="justify-content-center">
                 <Col xs={12} md={10} lg={7}>
-                    <h2 className="login-heading">SIGNUP</h2>
+                    <h2 className="signup-heading">SIGNUP</h2>
                 </Col>
             </Row>
             <br/>
             <Row className="justify-content-center">
                 <Col xs={12} md={10} lg={7}>
-                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                    <Form noValidate validated={true} onSubmit={handleSubmit}>
                         <Form.Group as={Row} controlId="enterUserName">
                             <Form.Label className="signup-label" column xs={3} md={2}>Username</Form.Label>
                             <Col xs={9} md={10}>
@@ -94,7 +92,6 @@ const SignUp = () => {
                                     type="text"
                                     pattern="[A-Za-z0-9]{4,15}"
                                     placeholder="Enter username..."
-                                    onChange={(e) => setUserName(e.target.value)}
                                 ></Form.Control>
                                 <Form.Control.Feedback type="invalid">{userNameFeedback}</Form.Control.Feedback>
                             </Col>
@@ -107,7 +104,6 @@ const SignUp = () => {
                                     required
                                     type="email"
                                     placeholder="Enter email..."
-                                    onChange={(e) => setEmail(e.target.value)}
                                 ></Form.Control>
                                 <Form.Control.Feedback type="invalid">{emailFeedback}</Form.Control.Feedback>
                             </Col>
@@ -123,7 +119,7 @@ const SignUp = () => {
                                     placeholder="Password"
                                     onChange={(e) => setPassword(e.target.value)}
                                 ></Form.Control>
-                                <Form.Control.Feedback type="invalid">{passwordFeedback}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">Min 6 characters</Form.Control.Feedback>
                             </Col>
                         </Form.Group>
                         <br/>
@@ -140,10 +136,7 @@ const SignUp = () => {
                             </Col>
                         </Form.Group>
                         <br />
-                        <Button
-                            type="submit"
-                            variant="light"
-                            >Submit</Button>
+                        <Button type="submit" variant="light">Submit</Button>
                     </Form>
                 </Col>
             </Row>
