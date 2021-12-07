@@ -18,7 +18,7 @@ const ResetPasswordModal = (props) => {
         const form = event.currentTarget;
         try {
             event.preventDefault();
-            const response = await axios.post('http://localhost:4000/resetPassword', { "email": resetEmail });
+            const response = await axios.post('http://localhost:4000/send_reset', { "email": resetEmail });
             setSuccessMessage('Success! Check email for reset instructions.');
             toggleShowButton('d-none');
             form.resetPassword.setCustomValidity('');

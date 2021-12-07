@@ -15,7 +15,7 @@ const Header = (props) => {
         const fetchData = async () => {
             console.log('verifying token');
             try {
-                const response = await axios.get("http://localhost:4000/verify", {
+                const response = await axios.get("http://localhost:4000/verify_token", {
                     headers: {
                         "Authorization": context.token.data
                     }

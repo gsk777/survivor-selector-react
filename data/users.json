@@ -1,1 +1,64 @@
-{"users":[{"id":1,"username":"gkent","email":"gskent7@gmail.com","password":"hello","resetPassword":{"token":"74d6d7bc507057284779710fa51736b4a910f50b","expires":1637050078029}},{"id":2,"username":"jschmo","email":"joe@mail.com","password":"joe"},{"id":3,"username":"jdoe","email":"jane@mail.com","password":"jane"},{"id":4,"username":"testguy","email":"testguy@mail.com","password":"password"},{"id":5,"username":"Freddy300","email":"freddy@mail.com","password":"Password"},{"id":6,"username":"user6","email":"user6@mail.com","password":"Password"}]}
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "gkent",
+            "email": "gskent7@gmail.com",
+            "password": "password",
+            "resetPassword": {
+                "token": "9ccd7264a3270245e7ed5d8ab84750cd1f756e0f",
+                "expires": 1638906723743
+            }
+        },
+        {
+            "id": 2,
+            "username": "jschmo",
+            "email": "joe@mail.com",
+            "password": "joe",
+            "resetPassword": {
+                "token": "74d6d7bc507057284779710fa51736b4a910f50b",
+                "expires": 1637050078029
+            }
+        },
+        {
+            "id": 3,
+            "username": "jdoe",
+            "email": "jane@mail.com",
+            "password": "jane",
+            "resetPassword": {
+                "token": "74d6d7bc507057284779710fa51736b4a910f50b",
+                "expires": 1637050078029
+            }
+        },
+        {
+            "id": 4,
+            "username": "testguy",
+            "email": "testguy@mail.com",
+            "password": "password",
+            "resetPassword": {
+                "token": "74d6d7bc507057284779710fa51736b4a910f50b",
+                "expires": 1637050078029
+            }
+        },
+        {
+            "id": 5,
+            "username": "Freddy300",
+            "email": "freddy@mail.com",
+            "password": "Password",
+            "resetPassword": {
+                "token": "74d6d7bc507057284779710fa51736b4a910f50b",
+                "expires": 1637050078029
+            }
+        },
+        {
+            "id": 6,
+            "username": "user6",
+            "email": "user6@mail.com",
+            "password": "Password",
+            "resetPassword": {
+                "token": "74d6d7bc507057284779710fa51736b4a910f50b",
+                "expires": 1637050078029
+            }
+        }
+    ]
+}

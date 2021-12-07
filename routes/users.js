@@ -46,6 +46,20 @@ const usersRoutes = (app, fs) => {
         return [false];
     }
 
+    // Checking validity of reset password token
+    const resetTokenValid = (users, token) => {
+        let validity = [false, undefined];
+        for (let i = 0; i < users.length; i++) {
+            if ((users[i]["resetPassword"]["token"] === token) && (users[i]["resetPassword"]["expires"] > Date.now())) {
+                console.log('reset token is valid');
+                validity = [true, i];
+                return validity;
+            }
+        }
+        console.log('reset token is no longer valid');
+        return validity;
+    }
+
     // Login authentication via Login.js
     app.post('/login', (req, res) => {
         fs.readFile(dataPath, 'utf8', (err, data) => {
@@ -76,7 +90,7 @@ const usersRoutes = (app, fs) => {
     })
 
     // New User Submission via SignUp.js
-    app.post('/newuser', (req, res) => {
+    app.post('/new_user', (req, res) => {
         fs.readFile(dataPath, 'utf8', (err, data) => {
             if (err) {
                 throw err;
@@ -93,7 +107,8 @@ const usersRoutes = (app, fs) => {
                     "id": len+1,
                     "username": req.body.username,
                     "email": req.body.email,
-                    "password": req.body.password
+                    "password": req.body.password,
+                    "resetPassword": {}
                 })
                 fs.writeFile(dataPath, JSON.stringify(parsed), 'utf-8', err => {
                     if (err) {
@@ -107,7 +122,7 @@ const usersRoutes = (app, fs) => {
     })
 
     // Sending reset password email
-    app.post('/resetPassword', (req, res) => {
+    app.post('/send_reset', (req, res) => {
         fs.readFile(dataPath, 'utf8', (err, data) => {
             if (err) {
                 throw err;
@@ -144,7 +159,10 @@ const usersRoutes = (app, fs) => {
                     to: `${req.body.email}`,
                     subject: 'Reset Password',
                     text:
-                        `TEST TEST TEST`
+                        'You are receiving this email because you (or someone else) have requested to reset the password associated with your account.\n\n'
+                        + 'Please click on the link below for reset instructions:\n\n'
+                        + `http://localhost:3000/reset/${token}\n\n`
+                        + 'This link will expire in 1 hour. If you did not request this email, please ignore and your password will remain unchanged.'
                 };
 
                 transporter.sendMail(mailOptions, function(err, response) {
@@ -159,8 +177,48 @@ const usersRoutes = (app, fs) => {
             }
         })
     })
+
+    // Verifying reset password token
+    app.get('/verify_reset', (req, res) => {
+        fs.readFile(dataPath, 'utf8', (err, data) => {
+            if (err) {
+                throw err;
+            }
+            const parsed = JSON.parse(data);
+            const valid = resetTokenValid(parsed["users"], req.headers.token);
+            console.log(valid);
+            if (valid[0]) {
+                res.status(200).send(valid);
+            } else {
+                res.sendStatus(401);
+            }
+        })
+        
+    })
+
+    // Updating user password via Reset.js
+    app.post('/update_password', (req, res) => {
+        fs.readFile(dataPath, 'utf8', (err, data) => {
+            if (err) {
+                throw err;
+            }
+            const parsed = JSON.parse(data);
+            console.log(parsed.users[req.body.user]);
+            parsed.users[req.body.user]["password"] = req.body.password;
+            console.log(parsed.users[req.body.user]);
+
+            fs.writeFile(dataPath, JSON.stringify(parsed), 'utf8', err => {
+                if (err) {
+                    throw err;
+                }
+            });
+
+            res.sendStatus(200);
+        })
+    })
+
     // Verifying local user token
-    app.get('/verify', (req, res) => {
+    app.get('/verify_token', (req, res) => {
         const token = (req.headers.authorization);
 
         jwt.verify(token, PUBLIC_KEY, {format: 'PKCS8', algorithms: ['RS256']}, (err, decoded) => {
