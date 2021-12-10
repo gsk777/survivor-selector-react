@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 
@@ -20,6 +21,7 @@ const Reset = () => {
     const [password, setPassword] = useState("");
     const [confirmFeedback, setConfirmFeedback] = useState("");
     const [resetSuccess, setResetSuccess] = useState(false);
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         const verifyToken = async () => {
@@ -66,7 +68,7 @@ const Reset = () => {
         }
     }
 
-    if (resetSuccess) {
+    if (redirect) {
         return <Redirect to='/login' />
     }
 
@@ -114,6 +116,16 @@ const Reset = () => {
                         </Form>
                     </Col>
                 </Row>
+                <Modal show={resetSuccess} centered >
+                    <Modal.Header closeButton>
+                        <h5>Password Reset Successfully!</h5>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form onSubmit={() => setRedirect(true)}>
+                            <Button type="submit" variant="dark">Login</Button>
+                        </Form>
+                    </Modal.Body>
+                </Modal>
             </Container>
         )
     } else {
