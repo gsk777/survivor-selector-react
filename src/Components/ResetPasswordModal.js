@@ -2,6 +2,7 @@ import React, { useState }  from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 import axios from 'axios';
 
@@ -12,10 +13,12 @@ const ResetPasswordModal = (props) => {
     const [emailError, setEmailError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [showButton, toggleShowButton] = useState("");
+    const [submitIsLoading, toggleSubmitIsLoading] = useState(false);
     const [validated, setValidated] = useState(true);
 
     const handleResetSubmit = async (event) => {
         const form = event.currentTarget;
+        toggleSubmitIsLoading(true);
         try {
             event.preventDefault();
             const response = await axios.post('http://localhost:4000/send_reset', { "email": resetEmail });
@@ -26,6 +29,7 @@ const ResetPasswordModal = (props) => {
             form.resetPassword.setCustomValidity('Email address not found');
             setEmailError('Email address not found');
         }
+        toggleSubmitIsLoading(false);
         setValidated(true);
     }
 
@@ -52,7 +56,15 @@ const ResetPasswordModal = (props) => {
                             <Form.Control.Feedback type="invalid">{emailError}</Form.Control.Feedback>
                             <Form.Control.Feedback type="valid">{successMessage}</Form.Control.Feedback>
                         </Form.Group>
-                        <Button type="submit" variant="dark" className={showButton}>Reset</Button>
+                        <Button type="submit" variant="dark" className={showButton}>
+                            <Spinner
+                                animation="grow"
+                                role="status"
+                                size="sm"
+                                className={submitIsLoading ? "" : "d-none"}>
+                            </Spinner>
+                            {submitIsLoading ? "" : "Reset"}
+                        </Button>
                     </Form>
                 </Modal.Body>
             </Modal>
