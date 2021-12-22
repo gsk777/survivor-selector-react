@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer, useContext } from 'react';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Spinner from 'react-bootstrap/Spinner';
 import { Redirect } from 'react-router';
 import SectionHeader from './SectionHeader';
 import SelectWatchlist from './SelectWatchlist';
@@ -22,6 +23,7 @@ const MyWatchlist = () => {
     const [selectedList, setSelectedList] = useState("empty");
     const [userWL, dispatch] = useReducer(userWLReducer, {});
     const [hideInactive, toggleHideInactive] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     // pull user data on initial render
     useEffect(() => {
@@ -40,6 +42,7 @@ const MyWatchlist = () => {
                 localStorage.removeItem('token');
                 context.setToken(undefined);
             }
+            setIsLoading(false);
         }
         fetchData();
     }, [context]);
@@ -125,9 +128,15 @@ const MyWatchlist = () => {
                     />
                 </Col>
             </Row>
-            <Row className="justify-content-center pt-1 mx-0">
+            <Row className={"justify-content-center pt-1 mx-0" + (isLoading ? " d-none" : "")}>
                 <Col md={10} lg={8} xl={11}>
                     <WatchlistWindow/>
+                </Col>
+            </Row>
+            <Row className={"justify-content-center pt-1 mx-0" + (isLoading ? "" : " d-none")}>
+                <Col md={10} lg={8} xl={11} className="text-center">
+                    <Spinner animation="border" variant="light"></Spinner>
+                    <span className="text-light h4 pl-2">Loading...</span>
                 </Col>
             </Row>
             <br/>
