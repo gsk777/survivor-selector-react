@@ -38,6 +38,7 @@ import s37Logo from './Images/David vs Goliath.png';
 import s38Logo from './Images/Edge of Extinction.png';
 import s39Logo from './Images/Island of the Idols.png';
 import s40Logo from './Images/Winners at War.png';
+import s41Logo from './Images/41.png';
 
 let seasonData = new Map();
 seasonData.set(1, {
@@ -1289,6 +1290,37 @@ seasonData.set(40, {
                 'Tyson Apostol',
                 'Wendell Holland',
                 'Yul Kwon']
+});
+
+seasonData.set(41, {
+    seasonName: "41",
+    seasonWinner: "Erika Casupanan",
+    showWinner: false,
+    seasonLogo: s41Logo,
+    seasonColor: "#adc8e5",
+    castType: "newbie",
+    numTribes: "three",
+    finalTribal: 3,
+    secondChance: "none",
+    tier: 2,
+    seasonCast: ['Brad Reese',
+                'Danny McCray',
+                'David Voce',
+                'Deshawn Radden',
+                'Eric Abraham',
+                'Erika Casupanan',
+                'Evvie Jagoda',
+                'Genie Chen',
+                'Heather Aldret',
+                'JD Robinson',
+                'Liana Wallace',
+                'Naseer Muttalif',
+                'Ricard Foyé',
+                'Sara Wilson',
+                'Shan Smith',
+                'Sydney Segal',
+                'Tiffany Seely',
+                'Xander Hastings']
 });
 
 
