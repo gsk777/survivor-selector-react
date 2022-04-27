@@ -3,20 +3,23 @@ const crypto  = require('crypto');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const usersRoutes = (app, fs) => {
     const dataPath = './data/users.json';
 
     const PRIVATE_KEY = fs.readFileSync('./jwtRS256.key');
     const PUBLIC_KEY = fs.readFileSync('./jwtRS256.key.pub');
 
-    // Validation for user on Login attempt
-    const validateUser = (users, email, password) => {
+    // Find user on Login attempt
+    const findUser = (users, email) => {
         for (let i = 0; i < users.length; i++) {
-            if ((users[i]["email"] === email) && (users[i]["password"] === password)) {
-                return [ users[i]["id"], i, true ];
+            if (users[i]["email"] === email) {
+                return [ users[i]["id"], i, users[i]["password"] ]
             }
         }
-        return [undefined, false];
+        return undefined;
     };
 
     // Confirming availability of both username and email on signup submission
@@ -66,27 +69,29 @@ const usersRoutes = (app, fs) => {
             if (err) {
                 throw err;
             }
-            const parsed = JSON.parse(data)["users"];
-            const [userId, index, valid] = validateUser(parsed, req.body.email, req.body.password);
+            let parsed = JSON.parse(data)["users"];
+            const [userId, index, hash] = findUser(parsed, req.body.email);
             
-            if (valid) {
-                const payload = {
-                    "name": parsed[index].name,
-                    "email": parsed[index].email
+            bcrypt.compare(req.body.password, hash, function(err, result) {
+                if (err) {
+                    throw err;
                 }
-                const token = jwt.sign(payload, {key: PRIVATE_KEY, passphrase: "pebble18"}, {
-                    algorithm: 'RS256',
-                    expiresIn: 3600,
-                    subject: userId.toString()
-                });
-                console.log(token);
-
-                res.status(200).json(token);
-
-            } else {
-                res.sendStatus(401);
-            }
-        })
+                if (result) {
+                    const payload = {
+                        "name": parsed[index].name,
+                        "email": parsed[index].email
+                    }
+                    const token = jwt.sign(payload, {key: PRIVATE_KEY, passphrase: "pebble18"}, {
+                        algorithm: 'RS256',
+                        expiresIn: 3600,
+                        subject: userId.toString()
+                    });
+                    res.status(200).json(token);
+                } else {
+                    res.sendStatus(401);
+                }
+            });
+        });
     })
 
     // New User Submission via SignUp.js
@@ -99,21 +104,24 @@ const usersRoutes = (app, fs) => {
             const status = validateNewUser(parsed["users"], req.body.username, req.body.email);
 
             if ((status[0] && status[1]) && (req.body.password === req.body.confirm)){
-                console.log('writing new user to users.json');
                 res.status(200).send(status);
                 let len = parsed.users.length;
-                console.log(len);
-                parsed.users.push({
-                    "id": len+1,
-                    "username": req.body.username,
-                    "email": req.body.email,
-                    "password": req.body.password,
-                    "resetPassword": {}
-                })
-                fs.writeFile(dataPath, JSON.stringify(parsed), 'utf-8', err => {
+                bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
                     if (err) {
                         throw err;
                     }
+                    parsed.users.push({
+                        "id": len+1,
+                        "username": req.body.username,
+                        "email": req.body.email,
+                        "password": hash,
+                        "resetPassword": {}
+                    })
+                    fs.writeFile(dataPath, JSON.stringify(parsed), 'utf-8', err => {
+                        if (err) {
+                            throw err;
+                        }
+                    })
                 })
             } else {
                 res.status(200).send(status);
@@ -203,17 +211,19 @@ const usersRoutes = (app, fs) => {
                 throw err;
             }
             const parsed = JSON.parse(data);
-            console.log(parsed.users[req.body.user]);
-            parsed.users[req.body.user]["password"] = req.body.password;
-            console.log(parsed.users[req.body.user]);
-
-            fs.writeFile(dataPath, JSON.stringify(parsed), 'utf8', err => {
+            bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
                 if (err) {
                     throw err;
                 }
-            });
+                parsed.users[req.body.user]["password"] = hash;
 
-            res.sendStatus(200);
+                fs.writeFile(dataPath, JSON.stringify(parsed), 'utf8', err => {
+                    if (err) {
+                        throw err;
+                    }
+                    res.sendStatus(200);
+                });
+            });
         })
     })
 
