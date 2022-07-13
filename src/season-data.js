@@ -39,6 +39,7 @@ import s38Logo from './Images/Edge of Extinction.png';
 import s39Logo from './Images/Island of the Idols.png';
 import s40Logo from './Images/Winners at War.png';
 import s41Logo from './Images/41.png';
+import s42Logo from './Images/42.png';
 
 let seasonData = new Map();
 seasonData.set(1, {
@@ -1321,6 +1322,37 @@ seasonData.set(41, {
                 'Sydney Segal',
                 'Tiffany Seely',
                 'Xander Hastings']
+});
+
+seasonData.set(42, {
+    seasonName: "42",
+    seasonWinner: "Maryanne Oketch",
+    showWinner: false,
+    seasonLogo: s42Logo,
+    seasonColor: "#9dd2e0",
+    castType: "newbie",
+    numTribes: "three",
+    finalTribal: 3,
+    secondChance: "none",
+    tier: 2,
+    seasonCast: ['Chanelle Howell',
+                'Daniel Strunk',
+                'Drea Wheeler',
+                'Hai Giang',
+                'Jackson Fox',
+                'Jenny Kim',
+                'Jonathan Young',
+                'Lindsay Dolashewich',
+                'Lydia Meredith',
+                'Marya Sherron',
+                'Maryanne Oketch',
+                'Mike Turner',
+                'Omar Zaheer',
+                'Rocksroy Bailey',
+                'Romeo Escobar',
+                'Swati Goel',
+                'Tori Meehan',
+                'Zach Wurtenberger']
 });
 
 
