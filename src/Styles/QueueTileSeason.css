@@ -1,0 +1,12 @@
+.queue-season-number {
+    text-shadow: 1px 1px 2px black;
+}
+
+.queue-season-name {
+    text-shadow: 1px 1px 2px black;
+    font-size: .75rem;
+}
+
+.queue-tile-container {
+    height: 80px;
+}

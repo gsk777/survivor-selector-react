@@ -1100,7 +1100,7 @@ seasonData.set(34, {
 });
 
 seasonData.set(35, {
-    seasonName: "Heroes, Healers, Hustlers",
+    seasonName: "HHH",
     seasonWinner: "Ben Driebergen",
     showWinner: false,
     seasonLogo: s35Logo,
@@ -1294,7 +1294,7 @@ seasonData.set(40, {
 });
 
 seasonData.set(41, {
-    seasonName: "41",
+    seasonName: "",
     seasonWinner: "Erika Casupanan",
     showWinner: false,
     seasonLogo: s41Logo,
@@ -1325,7 +1325,7 @@ seasonData.set(41, {
 });
 
 seasonData.set(42, {
-    seasonName: "42",
+    seasonName: "",
     seasonWinner: "Maryanne Oketch",
     showWinner: false,
     seasonLogo: s42Logo,
@@ -1355,6 +1355,10 @@ seasonData.set(42, {
                 'Zach Wurtenberger']
 });
 
+export const seasonNumArray = [];
+for (var i = 1; i <= seasonData.size; i++) {
+    seasonNumArray.push(i);
+}
 
 export const numSeasons = seasonData.size;
 export default seasonData;

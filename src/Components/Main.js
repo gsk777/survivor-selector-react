@@ -4,6 +4,7 @@ import Home from './Home';
 import Login from './Login';
 import SignUp from './SignUp';
 import MyWatchlist from './MyWatchlist';
+import MyRankings from './MyRankings';
 import Logout from './Logout';
 import Reset from './Reset';
 
@@ -15,6 +16,7 @@ const Main = () => {
             <Route exact path='/login' component={Login}></Route>
             <Route exact path= '/signup' component={SignUp}></Route>
             <Route exact path='/mywatchlist' component={MyWatchlist}></Route>
+            <Route exact path='/myrankings' component={MyRankings}></Route>
             <Route exact path='/logout' component={Logout}></Route>
             <Route exact path='/reset/:token' component={Reset}></Route>
         </Switch>
