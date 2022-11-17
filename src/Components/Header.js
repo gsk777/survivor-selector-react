@@ -43,6 +43,7 @@ const Header = (props) => {
                             ? <Link to='/login' className="header-link">Login</Link>
                             :   <>
                                     <Link to='/mywatchlist' className="header-link">My Watchlist</Link>
+                                    <Link to='/myrankings' className="header-link">My Rankings</Link>
                                     <Link to='/logout' className="header-link">Logout</Link>
                                 </>
                         } 

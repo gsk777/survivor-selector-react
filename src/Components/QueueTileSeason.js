@@ -13,6 +13,7 @@ const QueueTileSeason = (props) => {
 
     const [{isDragging}, drag] = useDrag(() => ({
         type: 'season',
+        item: { id: props.season, tier: props.tier },
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),
@@ -23,7 +24,7 @@ const QueueTileSeason = (props) => {
         <Container
             ref={drag}
             className="queue-tile-container rounded d-flex flex-column justify-content-center"
-            style={{backgroundColor: seasonColor,
+            style={{borderColor: seasonColor,
                     opacity: isDragging ? 0.5 : 1}}>
             <Row className="h-25">
                 <Col>
@@ -32,7 +33,7 @@ const QueueTileSeason = (props) => {
             </Row>
             <Row className="h-50">
                 <Col>
-                    <p className="queue-season-name text-center text-light font-weight-bold mt-1">{seasonData.get(props.season).seasonName}</p>
+                    <p className="queue-season-name text-center text-light mt-1">{seasonData.get(props.season).seasonName}</p>
                 </Col>
             </Row>
         </Container>

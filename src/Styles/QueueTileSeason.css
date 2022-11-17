@@ -3,10 +3,12 @@
 }
 
 .queue-season-name {
-    text-shadow: 1px 1px 2px black;
-    font-size: .75rem;
+    font-size: .70rem;
+    font-weight: 500;
 }
 
 .queue-tile-container {
     height: 80px;
+    border-style: solid;
+    border-width: 4px;
 }

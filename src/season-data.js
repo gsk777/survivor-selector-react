@@ -1294,7 +1294,7 @@ seasonData.set(40, {
 });
 
 seasonData.set(41, {
-    seasonName: "",
+    seasonName: "\"41\"",
     seasonWinner: "Erika Casupanan",
     showWinner: false,
     seasonLogo: s41Logo,
@@ -1325,7 +1325,7 @@ seasonData.set(41, {
 });
 
 seasonData.set(42, {
-    seasonName: "",
+    seasonName: "\"42\"",
     seasonWinner: "Maryanne Oketch",
     showWinner: false,
     seasonLogo: s42Logo,
