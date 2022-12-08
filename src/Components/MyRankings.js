@@ -64,38 +64,44 @@ const MyRankings = () => {
     const addToRanked = (season, oldSeason, newTier, oldTier) => {
         console.log('adding season to ranked board');
         const updated = {...ranked}
-        // removes season from previous tier if previously ranked in another tier OR
-        // removes season from current tier if moving to the end of that tier
-        if (((oldTier !== undefined) && (oldTier !== newTier)) || ((oldTier !== undefined) && (oldSeason === null))) {
-            var updatedOldTier = [];
-            for (var i = 0; i < updated[oldTier].length; i++) {
-                if (updated[oldTier][i] !== season) {
-                    updatedOldTier.push(updated[oldTier][i]);
-                }
-            }
-            updated[oldTier] = updatedOldTier;
-        }
-        // adds season to new tier if placing in occupied tier
-        if (oldSeason !== null) {
-            var updatedNewTier = [];
-            for (var j = 0; j < updated[newTier].length; j++) {
-                const compare = updated[newTier][j];
-                if (compare === season) {
-                    continue;
-                }
-                if (compare === oldSeason) {
-                    updatedNewTier.push(season, oldSeason);
-                    continue;
-                } else {
-                    updatedNewTier.push(compare);
-                }
-            }
-            updated[newTier] = updatedNewTier;
-        // adds season to end of tier
+        // changes nothing if season is dropped back in its original place
+        if (season === oldSeason) {
+            return;
         } else {
-            updated[newTier].push(season);
-        }
-        setRanked(updated);
+            // removes season from previous tier if previously ranked in another tier OR
+            // removes season from current tier if moving to the end of that tier
+            if (((oldTier !== undefined) && (oldTier !== newTier)) || ((oldTier !== undefined) && (oldSeason === null))) {
+                var updatedOldTier = [];
+                for (var i = 0; i < updated[oldTier].length; i++) {
+                    if (updated[oldTier][i] !== season) {
+                        updatedOldTier.push(updated[oldTier][i]);
+                    }
+                }
+                updated[oldTier] = updatedOldTier;
+            }
+            // adds season to new tier if placing in occupied tier
+            if (oldSeason !== null) {
+                var updatedNewTier = [];
+                for (var j = 0; j < updated[newTier].length; j++) {
+                    const compare = updated[newTier][j];
+                    if (compare === season) {
+                        continue;
+                    }
+                    if (compare === oldSeason) {
+                        updatedNewTier.push(season, oldSeason);
+                        continue;
+                    } else {
+                        updatedNewTier.push(compare);
+                    }
+                }
+                updated[newTier] = updatedNewTier;
+            // adds season to end of tier
+            } else {
+                updated[newTier].push(season);
+            }
+            setRanked(updated);
+            }
+        
     }
 
     const ContextValue = {
@@ -112,14 +118,14 @@ const MyRankings = () => {
         <MyRankingsContext.Provider value={ContextValue}>
             <br/>
             <Row className="justify-content-center mx-0">
-                <Col lg={10}>
+                <Col lg={11}>
                     <SectionHeader section={"My Rankings"} active={true} />
                 </Col>
             </Row>
             <br/>
             <ToggleRankings />
             <Row className="justify-content-center mx-0">
-                <Col lg={10}>
+                <Col lg={11}>
                     <RankingSet type={selectedRanking}/>
                 </Col>
             </Row>

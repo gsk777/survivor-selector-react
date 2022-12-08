@@ -10,8 +10,10 @@ const RankedTileSeason = (props) => {
     const context = useContext(MyRankingsContext);
 
     const onDrop = (season, oldTier) => {
-        context.removeFromQueue(season);
-        context.addToRanked(season, props.season, props.tier, oldTier);
+        if ((context.ranked[props.tier].length < 11) || (oldTier === props.tier)) {
+            context.removeFromQueue(season);
+            context.addToRanked(season, props.season, props.tier, oldTier);
+        }
     }
 
     const [{ isOver }, drop] = useDrop(() => ({
@@ -26,7 +28,7 @@ const RankedTileSeason = (props) => {
 
     return (
         <div ref={drop}>
-            <QueueTileSeason season={props.season} tier={props.tier}/>
+            <QueueTileSeason season={props.season} tier={props.tier} rank={props.rank}/>
         </div>
     )
 }

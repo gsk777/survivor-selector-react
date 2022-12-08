@@ -25,7 +25,11 @@ const QueueTileSeason = (props) => {
             ref={drag}
             className="queue-tile-container rounded d-flex flex-column justify-content-center"
             style={{borderColor: seasonColor,
-                    opacity: isDragging ? 0.5 : 1}}>
+                    opacity: isDragging ? 0.5 : 1}}
+        >
+            <div className="rank-display">
+                <p className="text-center font-weight-bold">{props.rank}</p>
+            </div>
             <Row className="h-25">
                 <Col>
                     <p className="queue-season-number text-center text-light font-weight-bold">S{props.season}</p>
@@ -36,6 +40,7 @@ const QueueTileSeason = (props) => {
                     <p className="queue-season-name text-center text-light mt-1">{seasonData.get(props.season).seasonName}</p>
                 </Col>
             </Row>
+            <div className="corner-style" style={{backgroundImage: `linear-gradient(-45deg, ${seasonColor} 50%, transparent 50%)`}}></div>
         </Container>
         </>
     )

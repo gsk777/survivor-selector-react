@@ -3,3 +3,11 @@
     text-shadow: 1px 1px 2px black;
     margin-top: -1px;
 }
+
+.tier-header-letter {
+    font-size: 1.75rem;
+}
+
+.tier-header-title {
+    font-size: .8rem;
+}

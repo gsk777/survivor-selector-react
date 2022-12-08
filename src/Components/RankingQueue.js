@@ -35,7 +35,7 @@ const RankingQueue = () => {
                 <div>
                     <Row className="mx-0">
                         {context.seasonQueue.map(s => (
-                            <Col xl={1} className="py-1 px-1" key={s}>
+                            <Col md={1} className="py-1 px-1" key={s}>
                                 <QueueTileSeason season={s} />
                             </Col>
                         ))}

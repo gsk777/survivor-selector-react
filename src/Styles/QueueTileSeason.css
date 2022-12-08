@@ -1,10 +1,14 @@
 .queue-season-number {
     text-shadow: 1px 1px 2px black;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 
 .queue-season-name {
-    font-size: .70rem;
+    font-size: .65rem;
     font-weight: 500;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 
 .queue-tile-container {
@@ -12,3 +16,27 @@
     border-style: solid;
     border-width: 4px;
 }
+
+.rank-display {
+    position: absolute;
+    z-index: 3;
+    height: 10px;
+    width: 10px;
+    left: 10px;
+    top: 8px;
+    font-size: .75rem;
+    color: #e6b800;
+}
+
+.corner-style {
+    position: absolute;
+    z-index: 3;
+    width: 20%;
+    height: 20%;
+    right: 6px;
+    bottom: 6px;
+}
+
+/* @media (min-width: 1200px) {
+    
+} */

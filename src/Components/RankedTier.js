@@ -26,18 +26,33 @@ const RankedTier = (props) => {
         }),
     }),[context.seasonQueue, context.ranked]);
 
+    const overallRank = (season) => {
+        var rank = 1;
+        const tiers = Object.entries(context.ranked);
+        for (let i = 0; i < tiers.length; i++) {
+            for (let j = 0; j < tiers[i][1].length; j++) {
+                if (season === tiers[i][1][j]) {
+                    return rank;
+                } else {
+                    rank++;
+                }
+            }
+        }
+    }
+
     return (
         <Container
             fluid
             className="text-light p-0"
         >
             <Row className="mx-0">
-                <Col className="tier-header text-center pt-2" xl={1} style={ {backgroundColor: props.color} }>
-                    <h2>{props.tier}</h2>
+                <Col className="tier-header text-center pt-2 px-1" xs={1} style={ {backgroundColor: props.color} }>
+                    <h2 className="tier-header-letter">{props.tier}</h2>
+                    <p className="tier-header-title">{props.title}</p>
                 </Col>
                 {context.ranked[props.tier].map(s => (
-                    <Col xl={1} className="px-1 pt-1" key={s}>
-                        <RankedTileSeason season={s} tier={props.tier}/>
+                    <Col xl={1} lg={2} className="px-1 pt-1" key={s}>
+                        <RankedTileSeason season={s} tier={props.tier} rank={overallRank(s)}/>
                     </Col>
                 ))}
                 <Col ref={drop}>
